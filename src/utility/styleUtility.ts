@@ -57,9 +57,12 @@ function getReferenceName(name: string): string {
   let rName = name
     .split("/")
     .filter((path: string) => !!path)
-    .map((y) => y.trim().replaceAll(" ", "_"))
+    .map((n) => {
+      let n2 = n.trim().replaceAll(" ", "_");
+      return n2[0] != undefined ? n2[0].toLowerCase() + n2.slice(1) : ""
+    })
     .join("__");
-  return rName.toLowerCase();
+  return rName;
 }
 
 export { loadColorStyle, getReferenceName };

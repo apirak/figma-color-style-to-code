@@ -6,7 +6,12 @@ describe("Separete Key from Name", () => {
     expect(getReferenceName("Large /  Super")).toEqual("large__super");
     expect(getReferenceName("Large /Super")).toEqual("large__super");
     expect(getReferenceName("Large/Super")).toEqual("large__super");
-    expect(getReferenceName("XXLarge/Super")).toEqual("xxlarge__super");
+    expect(getReferenceName("XXLarge/Super")).toEqual("xXLarge__super");
+  });
+
+  it("Lower case on first name", () => {
+    expect(getReferenceName("LargeName")).toEqual("largeName");
+    expect(getReferenceName("LargeName/SmallName")).toEqual("largeName__smallName");
   });
 
   it("Separate Name with space", () => {
@@ -14,7 +19,7 @@ describe("Separete Key from Name", () => {
     expect(getReferenceName("Large /  Super man")).toEqual("large__super_man");
     expect(getReferenceName("Large /Super man")).toEqual("large__super_man");
     expect(getReferenceName("Large/Super man")).toEqual("large__super_man");
-    expect(getReferenceName("XXLarge/Super man")).toEqual("xxlarge__super_man");
+    expect(getReferenceName("XXLarge/Super man")).toEqual("xXLarge__super_man");
   });
 
   it("Separate two folder", () => {
@@ -27,7 +32,7 @@ describe("Separete Key from Name", () => {
     expect(getReferenceName("Large /Super /man")).toEqual("large__super__man");
     expect(getReferenceName("Large/Super /man")).toEqual("large__super__man");
     expect(getReferenceName("XXLarge/Super /  man")).toEqual(
-      "xxlarge__super__man"
+      "xXLarge__super__man"
     );
   });
 
