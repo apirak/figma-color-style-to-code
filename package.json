@@ -31,6 +31,10 @@
       {
         "name": "Generate XML",
         "main": "src/generateXML.ts"
+      },
+      {
+        "name": "Generate CSS",
+        "main": "src/generateCSS.ts"
       }
     ]
   }

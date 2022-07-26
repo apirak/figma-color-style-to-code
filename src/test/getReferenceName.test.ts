@@ -9,7 +9,6 @@ describe("Separete Key from Name", () => {
     expect(getReferenceName("XXLarge/Super")).toEqual("xxlarge__super");
   });
 
-
   it("Separate Name with space", () => {
     expect(getReferenceName("Large / Super man")).toEqual("large__super_man");
     expect(getReferenceName("Large /  Super man")).toEqual("large__super_man");
@@ -19,18 +18,28 @@ describe("Separete Key from Name", () => {
   });
 
   it("Separate two folder", () => {
-    expect(getReferenceName("Large / Super / man")).toEqual("large__super__man");
-    expect(getReferenceName("Large /  Super / man")).toEqual("large__super__man");
+    expect(getReferenceName("Large / Super / man")).toEqual(
+      "large__super__man"
+    );
+    expect(getReferenceName("Large /  Super / man")).toEqual(
+      "large__super__man"
+    );
     expect(getReferenceName("Large /Super /man")).toEqual("large__super__man");
     expect(getReferenceName("Large/Super /man")).toEqual("large__super__man");
-    expect(getReferenceName("XXLarge/Super /  man")).toEqual("xxlarge__super__man");
+    expect(getReferenceName("XXLarge/Super /  man")).toEqual(
+      "xxlarge__super__man"
+    );
   });
 
   // TODO: Try add "x / / lksdjf" style to figma and check real style name
   it("Ignore Empty Foler", () => {
     expect(getReferenceName("/Large/Super /man")).toEqual("large__super__man");
     expect(getReferenceName("//Large/Super /man")).toEqual("large__super__man");
-    expect(getReferenceName("///Large/Super /man")).toEqual("large__super__man");
-    expect(getReferenceName("/ /Large/Super /man")).toEqual("__large__super__man");
+    expect(getReferenceName("///Large/Super /man")).toEqual(
+      "large__super__man"
+    );
+    expect(getReferenceName("/ /Large/Super /man")).toEqual(
+      "__large__super__man"
+    );
   });
 });

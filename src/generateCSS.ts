@@ -8,27 +8,27 @@ let startPlugin = () => {
 
   console.log("allStyel", allStyle);
 
-  let xmlAllStyle = allStyle.map((style) => {
-    return `    <color name="${style.name}">${style.color}</color>`;
+  let cssAllStyle = allStyle.map((style) => {
+    return `$${style.name}: ${style.color};`;
   }).join("\n");
 
-  let xmlColor = [`<?xml version="1.0" encoding="utf-8"?>`, `<resources>`, xmlAllStyle, `</resources>`].join("\n");
+  let cssColor = [`// Design System Color`, cssAllStyle ].join("\n");
 
   const searchNode = figma.currentPage.findAll((node) =>
-    /#color.xml/.test(node.name)
+    /#color.scss/.test(node.name)
   );
 
   if (searchNode.length != 0) {
     if(searchNode[0].type == "TEXT") {
       let colorText = <TextNode>searchNode[0];
-      updateText(colorText, xmlColor).then(() => {
-        figma.closePlugin(`Update color.xml 🎉`);
+      updateText(colorText, cssColor).then(() => {
+        figma.closePlugin(`Update color.scss 🎉`);
       })
     } else {
-      figma.closePlugin(`Layer "#color.xml" is not text`);
+      figma.closePlugin(`Layer "#color.css" is not text`);
     }
   } else {
-    addText(xmlColor, 0, 0, "#color.xml").then(() => {
+    addText(cssColor, 0, 0, "#color.scss").then(() => {
       figma.closePlugin(`Added color.xml 🎉`);
     });
   }
