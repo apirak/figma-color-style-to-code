@@ -7,6 +7,7 @@ let startPlugin = () => {
   let allStyle = loadColorStyle();
 
   let xmlAllStyle = allStyle
+    .filter((style) => style.type === "SOLID" )
     .map((style) => {
       return `    <color name="${style.name}">${style.color}</color>`;
     })

@@ -31,7 +31,8 @@ function loadColorStyle():ColorStyle[] {
     let paint = colorStyle.paints[0];
 
     if (paint.type == "SOLID") {
-      allStyle.push({ type: "SOLID",
+      allStyle.push({
+        type: paint.type,
         name: getReferenceName(colorStyle.name),
         color: colorToHex(paint.color, paint.opacity),
         colorRGB: colorToRgb(paint.color, paint.opacity),
@@ -40,7 +41,13 @@ function loadColorStyle():ColorStyle[] {
     }
 
     if (paint.type == "GRADIENT_LINEAR") {
-      // return gradientString(paint, getColor, getAlphaColor);
+      allStyle.push({
+        type: paint.type,
+        name: getReferenceName(colorStyle.name),
+        color: gradientString(paint, colorToHex, colorToRgb),
+        colorRGB: gradientString(paint, colorToRgb, colorToRgb),
+        opacity: paint.opacity
+      });
     }
   });
   return allStyle;
