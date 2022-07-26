@@ -1,4 +1,4 @@
-import { getReferenceName } from "../styleUtility";
+import { getReferenceName } from "../utility/styleUtility";
 
 describe("Separete Key from Name", () => {
   it("Separate Simple Name", () => {

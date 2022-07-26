@@ -1,7 +1,7 @@
 import { colorToRgb, rgbToHex } from "./colorUtility";
 import { gradientString } from "./gradientUtility";
 
-type ColorStyle = { type: string; name: string; color: string };
+type ColorStyle = { type: string; name: string; color: string; colorRGB?: string; opacity?:number };
 
 let isSolidPaints = (
   fills: readonly Paint[] | PluginAPI["mixed"]
@@ -31,9 +31,12 @@ function loadColorStyle():ColorStyle[] {
     let paint = colorStyle.paints[0];
 
     if (paint.type == "SOLID") {
-      let name = getReferenceName(colorStyle.name);
-      let color = colorToHex(paint.color, paint.opacity);
-      allStyle.push({ type: "SOLID", name: name, color: color });
+      allStyle.push({ type: "SOLID",
+        name: getReferenceName(colorStyle.name),
+        color: colorToHex(paint.color, paint.opacity),
+        colorRGB: colorToRgb(paint.color, paint.opacity),
+        opacity: paint.opacity
+      });
     }
 
     if (paint.type == "GRADIENT_LINEAR") {

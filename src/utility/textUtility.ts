@@ -1,6 +1,6 @@
 export async function updateText(
   textNode: TextNode,
-  text: string,
+  text: string
 ): Promise<TextNode> {
   await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
   textNode.fontName = { family: "Roboto", style: "Regular" };
