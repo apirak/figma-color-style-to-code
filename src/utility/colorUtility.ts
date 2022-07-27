@@ -104,3 +104,13 @@ export function colorToRgb(color: RGB, opacity: number | undefined): string {
 
   return "rgba(" + r + ", " + g + ", " + b + ", " + a + ")";
 }
+
+export function colorToUIColor(color: RGB, opacity: number | undefined): string {
+  const r = color.r ? toFixedZero(color.r * 256) : "0";
+  const g = color.g ? toFixedZero(color.g * 256) : "0";
+  const b = color.b ? toFixedZero(color.b * 256) : "0";
+  const a =
+    opacity == 1 || opacity == undefined ? "1" : Number(opacity.toFixed(2));
+
+  return `UIColor(red: ${r}/255.0, green: ${g}/255.0, blue: ${b}/255.0 , alpha: ${a}/255.0)`;
+}

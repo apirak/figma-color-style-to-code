@@ -35,6 +35,14 @@
       {
         "name": "Generate CSS",
         "main": "src/generateCSS.ts"
+      },
+      {
+        "name": "Generate JSON",
+        "main": "src/generateJson.ts"
+      },
+      {
+        "name": "Generate Swift",
+        "main": "src/generateSwift.ts"
       }
     ]
   }

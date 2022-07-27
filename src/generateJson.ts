@@ -11,37 +11,33 @@ let startPlugin = () => {
     .filter((style) => style.type === "SOLID")
     .map((style) => {
       if(brandColor === {}) {
-        return `    <color name="${style.name}">${style.color}</color>`;
+        return `"${style.color}":"${style.name}"`;
       } else {
-        let color = brandColor[style.color] ? `@color.${brandColor[style.color]}` : style.color;
-        return `    <color name="${style.name}">${color}</color>`;
+        let color = brandColor[style.color] ? brandColor[style.color] : style.color;
+        return `"${color}":"${style.name}"`;
       }
     })
-    .join("\n");
+    .join(",\n");
 
-  let xmlColor = [
-    `<?xml version="1.0" encoding="utf-8"?>`,
-    `<resources>`,
-    xmlAllStyle,
-    `</resources>`,
-  ].join("\n");
+  let xmlColor = [`{`, xmlAllStyle, `}`].join(" ");
+
 
   const searchNode = figma.currentPage.findAll((node) =>
-    /#color.xml/.test(node.name)
+    /#color.json/.test(node.name)
   );
 
   if (searchNode.length != 0) {
     if (searchNode[0].type == "TEXT") {
       let colorText = <TextNode>searchNode[0];
       updateText(colorText, xmlColor).then(() => {
-        figma.closePlugin(`Update color.xml 🎉`);
+        figma.closePlugin(`Update color.json 🎉`);
       });
     } else {
-      figma.closePlugin(`Layer "#color.xml" is not text`);
+      figma.closePlugin(`Layer "#color.json" is not text`);
     }
   } else {
-    addText(xmlColor, 0, 0, "#color.xml").then(() => {
-      figma.closePlugin(`Added color.xml 🎉`);
+    addText(xmlColor, 0, 0, "#color.json").then(() => {
+      figma.closePlugin(`Added color.json 🎉`);
     });
   }
 };

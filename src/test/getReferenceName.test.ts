@@ -11,7 +11,9 @@ describe("Separete Key from Name", () => {
 
   it("Lower case on first name", () => {
     expect(getReferenceName("LargeName")).toEqual("largeName");
-    expect(getReferenceName("LargeName/SmallName")).toEqual("largeName__smallName");
+    expect(getReferenceName("LargeName/SmallName")).toEqual(
+      "largeName__smallName"
+    );
   });
 
   it("Separate Name with space", () => {
