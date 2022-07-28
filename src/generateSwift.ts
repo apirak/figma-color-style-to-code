@@ -18,7 +18,7 @@ let startPlugin = () => {
       if (Object.keys(brandColor).length === 0) {
         return [
           `    @nonobjc public class var ${style.name}: UIColor {`,
-          `        dynamicColor(light: ${style.UIColor}, dark: ${style.UIColor})`,
+          `        return ${style.UIColor}`,
           ``,
         ].join("\n");
       } else {
@@ -27,7 +27,7 @@ let startPlugin = () => {
           : style.UIColor;
         return [
           `    @nonobjc public class var ${style.name}: UIColor {`,
-          `        dynamicColor(light: ${color}, dark: ${color})`,
+          `        dynamicColor(day: ${color}, night: ${color})`,
           ``,
         ].join("\n");
       }
