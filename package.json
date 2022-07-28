@@ -33,8 +33,8 @@
         "main": "src/generateXML.ts"
       },
       {
-        "name": "Generate CSS",
-        "main": "src/generateCSS.ts"
+        "name": "Generate SCSS",
+        "main": "src/generateSCSS.ts"
       },
       {
         "name": "Generate JSON",

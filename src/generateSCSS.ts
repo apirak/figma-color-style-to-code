@@ -1,15 +1,23 @@
-import { ColorStyle, loadColorStyle } from "./utility/styleUtility";
+import { ColorStyle, loadColorStyle, BrandColorStyle, loadBrandColor } from "./utility/styleUtility";
 import { addText, updateText } from "./utility/textUtility";
 
 let allStyle: ColorStyle[] = [];
 
 let startPlugin = () => {
   let allStyle = loadColorStyle();
+  let brandColor: BrandColorStyle = loadBrandColor();
 
   let cssAllStyle = allStyle
     .map((style) => {
-      let colorText = style.opacity === 1 ? style.color : style.colorRGB;
-      return `$${style.name}: ${colorText};`;
+      if (Object.keys(brandColor).length === 0) {
+        let colorText = style.opacity === 1 ? style.color : style.colorRGB;
+        return `$${style.name}: ${colorText};`;
+      } else {
+        let color = brandColor[style.color]
+          ? `$${brandColor[style.color]}`
+          : style.opacity === 1 ? style.color : style.colorRGB;
+        return `$${style.name}: ${color}`;
+      }
     })
     .join("\n");
 
@@ -26,7 +34,7 @@ let startPlugin = () => {
         figma.closePlugin(`Update color.scss 🎉`);
       });
     } else {
-      figma.closePlugin(`Layer "#color.css" is not text`);
+      figma.closePlugin(`Layer "#color.scss" is not text`);
     }
   } else {
     addText(cssColor, 0, 0, "#color.scss").then(() => {

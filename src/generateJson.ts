@@ -1,26 +1,32 @@
-import { ColorStyle, loadColorStyle, BrandColorStyle, loadBrandColor } from "./utility/styleUtility";
+import {
+  ColorStyle,
+  loadColorStyle,
+  BrandColorStyle,
+  loadBrandColor,
+} from "./utility/styleUtility";
 import { addText, updateText } from "./utility/textUtility";
 
 let allStyle: ColorStyle[] = [];
 
 let startPlugin = () => {
   let allStyle = loadColorStyle();
-  let brandColor:BrandColorStyle = loadBrandColor();
+  let brandColor: BrandColorStyle = loadBrandColor();
 
   let xmlAllStyle = allStyle
     .filter((style) => style.type === "SOLID")
     .map((style) => {
-      if(brandColor === {}) {
+      if (Object.keys(brandColor).length === 0) {
         return `"${style.color}":"${style.name}"`;
       } else {
-        let color = brandColor[style.color] ? brandColor[style.color] : style.color;
+        let color = brandColor[style.color]
+          ? brandColor[style.color]
+          : style.color;
         return `"${color}":"${style.name}"`;
       }
     })
     .join(",\n");
 
   let xmlColor = [`{`, xmlAllStyle, `}`].join(" ");
-
 
   const searchNode = figma.currentPage.findAll((node) =>
     /#color.json/.test(node.name)

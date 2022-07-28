@@ -39,23 +39,24 @@ const loadBrandColor = () => {
   );
   if (searchBrandNode.length != 0 && searchBrandNode[0].type == "TEXT") {
     let brandColorNode = <TextNode>searchBrandNode[0];
-    return(JSON.parse(brandColorNode.characters));
+    return JSON.parse(brandColorNode.characters);
   } else {
     return {};
   }
-}
+};
 
 function loadColorStyle(): ColorStyle[] {
   let allStyle: ColorStyle[] = [];
 
   figma.getLocalPaintStyles().forEach((colorStyle) => {
-    if(colorStyle.paints.length === 0) {
+    if (colorStyle.paints.length === 0) {
       allStyle.push({
         type: "SOLID",
         name: getReferenceName(colorStyle.name),
         color: "#00000000",
-        colorRGB: "rgba(0, 0, 0, 0);",
-        UIColor: "UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0 , alpha: 1.0)",
+        colorRGB: "rgba(0, 0, 0, 0)",
+        UIColor:
+          "UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0 , alpha: 1.0)",
         opacity: 0,
       });
     } else {
