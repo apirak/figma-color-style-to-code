@@ -7,7 +7,7 @@ let startPlugin = () => {
   let allStyle = loadColorStyle();
   let brandColor: BrandColorStyle = loadBrandColor();
 
-  let cssAllStyle = allStyle
+  let codeAllStyle = allStyle
     .map((style) => {
       if (Object.keys(brandColor).length === 0) {
         let colorText = style.opacity === 1 ? style.color : style.colorRGB;
@@ -21,7 +21,7 @@ let startPlugin = () => {
     })
     .join("\n");
 
-  let cssColor = [`// Design System Color`, cssAllStyle].join("\n");
+  let codeColor = [`// Design System Color`, codeAllStyle].join("\n");
 
   const searchNode = figma.currentPage.findAll((node) =>
     /#color.scss/.test(node.name)
@@ -30,14 +30,14 @@ let startPlugin = () => {
   if (searchNode.length != 0) {
     if (searchNode[0].type == "TEXT") {
       let colorText = <TextNode>searchNode[0];
-      updateText(colorText, cssColor).then(() => {
+      updateText(colorText, codeColor).then(() => {
         figma.closePlugin(`Update color.scss 🎉`);
       });
     } else {
       figma.closePlugin(`Layer "#color.scss" is not text`);
     }
   } else {
-    addText(cssColor, 0, 0, "#color.scss").then(() => {
+    addText(codeColor, 0, 0, "#color.scss").then(() => {
       figma.closePlugin(`Added color.xml 🎉`);
     });
   }

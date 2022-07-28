@@ -12,7 +12,7 @@ let startPlugin = () => {
   let allStyle = loadColorStyle();
   let brandColor: BrandColorStyle = loadBrandColor();
 
-  let xmlAllStyle = allStyle
+  let codeAllStyle = allStyle
     .filter((style) => style.type === "SOLID")
     .map((style) => {
       if (Object.keys(brandColor).length === 0) {
@@ -26,7 +26,7 @@ let startPlugin = () => {
     })
     .join(",\n");
 
-  let xmlColor = [`{`, xmlAllStyle, `}`].join(" ");
+  let codeColor = [`{`, codeAllStyle, `}`].join(" ");
 
   const searchNode = figma.currentPage.findAll((node) =>
     /#color.json/.test(node.name)
@@ -35,14 +35,14 @@ let startPlugin = () => {
   if (searchNode.length != 0) {
     if (searchNode[0].type == "TEXT") {
       let colorText = <TextNode>searchNode[0];
-      updateText(colorText, xmlColor).then(() => {
+      updateText(colorText, codeColor).then(() => {
         figma.closePlugin(`Update color.json 🎉`);
       });
     } else {
       figma.closePlugin(`Layer "#color.json" is not text`);
     }
   } else {
-    addText(xmlColor, 0, 0, "#color.json").then(() => {
+    addText(codeColor, 0, 0, "#color.json").then(() => {
       figma.closePlugin(`Added color.json 🎉`);
     });
   }

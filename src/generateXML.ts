@@ -12,7 +12,7 @@ let startPlugin = () => {
   let allStyle = loadColorStyle();
   let brandColor: BrandColorStyle = loadBrandColor();
 
-  let xmlAllStyle = allStyle
+  let codeAllStyle = allStyle
     .filter((style) => style.type === "SOLID")
     .map((style) => {
       if (Object.keys(brandColor).length === 0) {
@@ -26,10 +26,10 @@ let startPlugin = () => {
     })
     .join("\n");
 
-  let xmlColor = [
+  let codeColor = [
     `<?xml version="1.0" encoding="utf-8"?>`,
     `<resources>`,
-    xmlAllStyle,
+    codeAllStyle,
     `</resources>`,
   ].join("\n");
 
@@ -40,14 +40,14 @@ let startPlugin = () => {
   if (searchNode.length != 0) {
     if (searchNode[0].type == "TEXT") {
       let colorText = <TextNode>searchNode[0];
-      updateText(colorText, xmlColor).then(() => {
+      updateText(colorText, codeColor).then(() => {
         figma.closePlugin(`Update color.xml 🎉`);
       });
     } else {
       figma.closePlugin(`Layer "#color.xml" is not text`);
     }
   } else {
-    addText(xmlColor, 0, 0, "#color.xml").then(() => {
+    addText(codeColor, 0, 0, "#color.xml").then(() => {
       figma.closePlugin(`Added color.xml 🎉`);
     });
   }

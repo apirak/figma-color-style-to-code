@@ -12,7 +12,7 @@ let startPlugin = () => {
   let allStyle = loadColorStyle();
   let brandColor: BrandColorStyle = loadBrandColor();
 
-  let xmlAllStyle = allStyle
+  let codeAllStyle = allStyle
     .filter((style) => style.type === "SOLID")
     .map((style) => {
       if (Object.keys(brandColor).length === 0) {
@@ -34,7 +34,7 @@ let startPlugin = () => {
     })
     .join("\n");
 
-  let codeColor = [`extension UIColor {`, xmlAllStyle, `}`].join("\n");
+  let codeColor = [`extension UIColor {`, codeAllStyle, `}`].join("\n");
 
   const searchNode = figma.currentPage.findAll((node) =>
     /#color.swift/.test(node.name)
