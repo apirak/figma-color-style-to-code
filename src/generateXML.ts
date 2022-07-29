@@ -55,3 +55,6 @@ let startPlugin = () => {
 };
 
 export default startPlugin;
+
+// export for test
+export { codeLocalStyle }
