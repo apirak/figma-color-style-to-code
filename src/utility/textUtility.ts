@@ -2,10 +2,10 @@ export async function updateText(
   textNode: TextNode,
   text: string
 ): Promise<TextNode> {
-  await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
-  textNode.fontName = { family: "Roboto", style: "Regular" };
-  textNode.characters = text;
-  return textNode;
+  await figma.loadFontAsync({ family: 'Roboto', style: 'Regular' })
+  textNode.fontName = { family: 'Roboto', style: 'Regular' }
+  textNode.characters = text
+  return textNode
 }
 
 export async function addText(
@@ -14,15 +14,15 @@ export async function addText(
   y: number,
   name: string
 ): Promise<TextNode> {
-  await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
-  const textNode = figma.createText();
-  textNode.fontName = { family: "Roboto", style: "Regular" };
-  textNode.fontSize = 12;
-  textNode.x = x;
-  textNode.y = y;
-  textNode.characters = text;
-  textNode.name = name;
-  return textNode;
+  await figma.loadFontAsync({ family: 'Roboto', style: 'Regular' })
+  const textNode = figma.createText()
+  textNode.fontName = { family: 'Roboto', style: 'Regular' }
+  textNode.fontSize = 12
+  textNode.x = x
+  textNode.y = y
+  textNode.characters = text
+  textNode.name = name
+  return textNode
 }
 
 export async function addTextNearSelected(
@@ -30,15 +30,15 @@ export async function addTextNearSelected(
   text: string,
   name: string
 ) {
-  let elementNode = <RectangleNode>node;
+  let elementNode = <RectangleNode>node
   const textNode = addText(
     text,
     elementNode.x,
     elementNode.y + elementNode.height + 20,
     name
-  );
-  (await textNode).name = name;
+  )
+  ;(await textNode).name = name
   if (elementNode.parent) {
-    elementNode.parent.appendChild(await textNode);
+    elementNode.parent.appendChild(await textNode)
   }
 }

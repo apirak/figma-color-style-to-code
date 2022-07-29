@@ -1,123 +1,123 @@
-export type HSLColor = { h: number; s: number; l: number };
-export type HSBColor = { h: number; s: number; b: number };
+export type HSLColor = { h: number; s: number; l: number }
+export type HSBColor = { h: number; s: number; b: number }
 
 export const colorNumberToHex = (color: number): string => {
-  const hex = Math.round(color * 255).toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
-};
+  const hex = Math.round(color * 255).toString(16)
+  return hex.length == 1 ? '0' + hex : hex
+}
 
 export function rgbToHex(r: number, g: number, b: number): string {
-  return "#" + colorNumberToHex(r) + colorNumberToHex(g) + colorNumberToHex(b);
+  return '#' + colorNumberToHex(r) + colorNumberToHex(g) + colorNumberToHex(b)
 }
 
 export function colorToHex(color: RGB, opacity: number | undefined): string {
   const a =
     opacity == 1 || opacity == undefined
-      ? ""
-      : " " + Number((opacity * 100).toFixed(0)) + "%";
-  return rgbToHex(color["r"], color["g"], color["b"]) + a;
+      ? ''
+      : ' ' + Number((opacity * 100).toFixed(0)) + '%'
+  return rgbToHex(color['r'], color['g'], color['b']) + a
 }
 
 export function rgbToHSB(r: number, g: number, b: number) {
   let v = Math.max(r, g, b),
-    c = v - Math.min(r, g, b);
+    c = v - Math.min(r, g, b)
   let h =
-    c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c);
-  return { h: 60 * (h < 0 ? h + 6 : h), s: v && c / v, b: v };
+    c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c)
+  return { h: 60 * (h < 0 ? h + 6 : h), s: v && c / v, b: v }
 }
 
 export function rgbToHSL(r: number, g: number, b: number) {
   let v = Math.max(r, g, b),
     c = v - Math.min(r, g, b),
-    f = 1 - Math.abs(v + v - c - 1);
+    f = 1 - Math.abs(v + v - c - 1)
   let h =
-    c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c);
-  return { h: 60 * (h < 0 ? h + 6 : h), s: f ? c / f : 0, l: (v + v - c) / 2 };
+    c && (v == r ? (g - b) / c : v == g ? 2 + (b - r) / c : 4 + (r - g) / c)
+  return { h: 60 * (h < 0 ? h + 6 : h), s: f ? c / f : 0, l: (v + v - c) / 2 }
 }
 
 export function colorToHSLObject(color: RGB): HSLColor {
-  return rgbToHSL(color["r"], color["g"], color["b"]);
+  return rgbToHSL(color['r'], color['g'], color['b'])
 }
 
 export function colorToHSBObject(color: RGB): HSBColor {
-  return rgbToHSB(color["r"], color["g"], color["b"]);
+  return rgbToHSB(color['r'], color['g'], color['b'])
 }
 
 export function colorToHSL(color: RGB, opacity: number | undefined): string {
-  const hsl: HSLColor = colorToHSLObject(color);
-  const hue = Number(hsl.h.toFixed(0));
-  const sat = Number(hsl.s.toFixed(2));
-  const lightness = Number(hsl.l.toFixed(2));
+  const hsl: HSLColor = colorToHSLObject(color)
+  const hue = Number(hsl.h.toFixed(0))
+  const sat = Number(hsl.s.toFixed(2))
+  const lightness = Number(hsl.l.toFixed(2))
   const a =
-    opacity == 1 || opacity == undefined ? "1" : Number(opacity.toFixed(2));
+    opacity == 1 || opacity == undefined ? '1' : Number(opacity.toFixed(2))
 
   return (
-    "hsla(" +
+    'hsla(' +
     hue +
-    ", " +
+    ', ' +
     Math.round(sat * 100) +
-    "%, " +
+    '%, ' +
     Math.round(lightness * 100) +
-    "%, " +
+    '%, ' +
     a +
-    ")"
-  );
+    ')'
+  )
 }
 
 export function colorToHSB(color: RGB, opacity: number | undefined): string {
-  const hsb: HSBColor = colorToHSBObject(color);
-  const hue = Number(hsb.h.toFixed(0));
-  const sat = Number(hsb.s.toFixed(2));
-  const brightness = Number(hsb.b.toFixed(2));
+  const hsb: HSBColor = colorToHSBObject(color)
+  const hue = Number(hsb.h.toFixed(0))
+  const sat = Number(hsb.s.toFixed(2))
+  const brightness = Number(hsb.b.toFixed(2))
   const a =
-    opacity == 1 || opacity == undefined ? "1" : Number(opacity.toFixed(2));
+    opacity == 1 || opacity == undefined ? '1' : Number(opacity.toFixed(2))
 
   return (
-    "hsba(" +
+    'hsba(' +
     hue +
-    ", " +
+    ', ' +
     Math.round(sat * 100) +
-    "%, " +
+    '%, ' +
     Math.round(brightness * 100) +
-    "%, " +
+    '%, ' +
     a +
-    ")"
-  );
+    ')'
+  )
 }
 
 const toFixedZero = (num: number): string => {
   if (Number.isInteger(num)) {
-    return (num - 1).toString();
+    return (num - 1).toString()
   }
-  const numString = num.toString();
-  const indexOfDot = numString.indexOf(".");
-  const fixedNumber = numString.slice(0, indexOfDot);
-  return fixedNumber != "" ? fixedNumber : "0";
-};
+  const numString = num.toString()
+  const indexOfDot = numString.indexOf('.')
+  const fixedNumber = numString.slice(0, indexOfDot)
+  return fixedNumber != '' ? fixedNumber : '0'
+}
 
 export function colorToRgb(color: RGB, opacity: number | undefined): string {
-  const r = color.r ? toFixedZero(color.r * 256) : "0";
-  const g = color.g ? toFixedZero(color.g * 256) : "0";
-  const b = color.b ? toFixedZero(color.b * 256) : "0";
+  const r = color.r ? toFixedZero(color.r * 256) : '0'
+  const g = color.g ? toFixedZero(color.g * 256) : '0'
+  const b = color.b ? toFixedZero(color.b * 256) : '0'
   const a =
-    opacity == 1 || opacity == undefined ? "1" : Number(opacity.toFixed(2));
+    opacity == 1 || opacity == undefined ? '1' : Number(opacity.toFixed(2))
 
-  return "rgba(" + r + ", " + g + ", " + b + ", " + a + ")";
+  return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + a + ')'
 }
 
 export function colorToUIColor(
   color: RGB,
   opacity: number | undefined
 ): string {
-  const r:number = color.r ? color.r : 0;
-  const g:number = color.g ? color.g : 0;
-  const b:number = color.b ? color.b : 0;
-  const a:number = opacity == 1 || opacity == undefined ? 1 : opacity;
+  const r: number = color.r ? color.r : 0
+  const g: number = color.g ? color.g : 0
+  const b: number = color.b ? color.b : 0
+  const a: number = opacity == 1 || opacity == undefined ? 1 : opacity
 
-  const rString:string = r.toFixed(2);
-  const gString:string = g.toFixed(2);
-  const bString:string = b.toFixed(2);
-  const aString:string = a.toFixed(2);
+  const rString: string = r.toFixed(2)
+  const gString: string = g.toFixed(2)
+  const bString: string = b.toFixed(2)
+  const aString: string = a.toFixed(2)
 
-  return `UIColor(red: ${rString}, green: ${gString}, blue: ${bString} , alpha: ${aString})`;
+  return `UIColor(red: ${rString}, green: ${gString}, blue: ${bString} , alpha: ${aString})`
 }

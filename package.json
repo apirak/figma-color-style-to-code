@@ -30,20 +30,20 @@
     "name": "Color Style To Code",
     "menu": [
       {
-        "name": "Generate XML",
+        "name": "Generate Android XML",
         "main": "src/generateXML.ts"
       },
       {
-        "name": "Generate SCSS",
+        "name": "Generate iOS Swift",
+        "main": "src/generateSwift.ts"
+      },
+      {
+        "name": "Generate Web SCSS",
         "main": "src/generateSCSS.ts"
       },
       {
-        "name": "Generate JSON",
+        "name": "Generate Reference JSON",
         "main": "src/generateJson.ts"
-      },
-      {
-        "name": "Generate Swift",
-        "main": "src/generateSwift.ts"
       }
     ]
   }
