@@ -109,11 +109,15 @@ export function colorToUIColor(
   color: RGB,
   opacity: number | undefined
 ): string {
-  const r = color.r ? toFixedZero(color.r * 256) : "0";
-  const g = color.g ? toFixedZero(color.g * 256) : "0";
-  const b = color.b ? toFixedZero(color.b * 256) : "0";
-  const a =
-    opacity == 1 || opacity == undefined ? "1" : Number(opacity.toFixed(2));
+  const r:number = color.r ? color.r : 0;
+  const g:number = color.g ? color.g : 0;
+  const b:number = color.b ? color.b : 0;
+  const a:number = opacity == 1 || opacity == undefined ? 1 : opacity;
 
-  return `UIColor(red: ${r}/255.0, green: ${g}/255.0, blue: ${b}/255.0 , alpha: ${a}/255.0)`;
+  const rString:string = r.toFixed(2);
+  const gString:string = g.toFixed(2);
+  const bString:string = b.toFixed(2);
+  const aString:string = a.toFixed(2);
+
+  return `UIColor(red: ${rString}, green: ${gString}, blue: ${bString} , alpha: ${aString})`;
 }
