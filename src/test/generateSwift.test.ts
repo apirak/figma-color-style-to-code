@@ -1,5 +1,4 @@
-// import { ColorStyle, BrandColorStyle } from "../utility/styleUtility";
-import { brandStyle, localStyle } from "./prepareDAta";
+import { brandStyle, localStyle } from "./dataForGenerateTesting";
 import { createFigma } from "figma-api-stub";
 import { codeLocalStyle } from "../generateSwift";
 
