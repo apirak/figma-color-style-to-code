@@ -1,31 +1,32 @@
 import {
   ColorStyle,
-  loadColorStyle,
+  loadLocalStyle,
   BrandColorStyle,
   loadBrandColor,
 } from "./utility/styleUtility";
 import { addText, updateText } from "./utility/textUtility";
 
-let allStyle: ColorStyle[] = [];
 
-let startPlugin = () => {
-  let allStyle = loadColorStyle();
-  let brandColor: BrandColorStyle = loadBrandColor();
-
-  let codeAllStyle = allStyle
+let codeLocalStyle = (localStyle: ColorStyle[], brandStyle: BrandColorStyle): string => {
+  return localStyle
     .filter((style) => style.type === "SOLID")
     .map((style) => {
-      if (Object.keys(brandColor).length === 0) {
+      if (Object.keys(brandStyle).length === 0) {
         return `    <color name="${style.name}">${style.color}</color>`;
       } else {
-        let color = brandColor[style.color]
-          ? `@color.${brandColor[style.color]}`
+        let color = brandStyle[style.color]
+          ? `@color.${brandStyle[style.color]}`
           : style.color;
         return `    <color name="${style.name}">${color}</color>`;
       }
     })
     .join("\n");
+}
 
+let startPlugin = () => {
+  let localStyle: ColorStyle[] = loadLocalStyle();
+  let brandColor: BrandColorStyle = loadBrandColor();
+  let codeAllStyle: string = codeLocalStyle(localStyle, brandColor);
   let codeColor = [
     `<?xml version="1.0" encoding="utf-8"?>`,
     `<resources>`,

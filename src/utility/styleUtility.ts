@@ -45,7 +45,7 @@ const loadBrandColor = () => {
   }
 };
 
-function loadColorStyle(): ColorStyle[] {
+function loadLocalStyle(): ColorStyle[] {
   let allStyle: ColorStyle[] = [];
 
   figma.getLocalPaintStyles().forEach((colorStyle) => {
@@ -100,5 +100,5 @@ function getReferenceName(name: string): string {
   return rName;
 }
 
-export { loadColorStyle, getReferenceName, loadBrandColor };
+export { loadLocalStyle, getReferenceName, loadBrandColor };
 export type { ColorStyle, BrandColorStyle };

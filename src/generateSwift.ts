@@ -1,29 +1,24 @@
 import {
   ColorStyle,
-  loadColorStyle,
+  loadLocalStyle,
   BrandColorStyle,
   loadBrandColor,
 } from "./utility/styleUtility";
 import { addText, updateText } from "./utility/textUtility";
 
-let allStyle: ColorStyle[] = [];
-
-let startPlugin = () => {
-  let allStyle = loadColorStyle();
-  let brandColor: BrandColorStyle = loadBrandColor();
-
-  let codeAllStyle = allStyle
+let codeLocalStyle = (localStyle: ColorStyle[], brandStyle: BrandColorStyle): string => {
+  return localStyle
     .filter((style) => style.type === "SOLID")
     .map((style) => {
-      if (Object.keys(brandColor).length === 0) {
+      if (Object.keys(brandStyle).length === 0) {
         return [
           `    @nonobjc public class var ${style.name}: UIColor {`,
           `        return ${style.UIColor}`,
           ``,
         ].join("\n");
       } else {
-        let color = brandColor[style.color]
-          ? `UIColor.${brandColor[style.color]}`
+        let color = brandStyle[style.color]
+          ? `UIColor.${brandStyle[style.color]}`
           : style.UIColor;
         return [
           `    @nonobjc public class var ${style.name}: UIColor {`,
@@ -33,7 +28,12 @@ let startPlugin = () => {
       }
     })
     .join("\n");
+}
 
+let startPlugin = () => {
+  let localStyle: ColorStyle[] = loadLocalStyle();
+  let brandColor: BrandColorStyle = loadBrandColor();
+  let codeAllStyle: string = codeLocalStyle(localStyle, brandColor);
   let codeColor = [`extension UIColor {`, codeAllStyle, `}`].join("\n");
 
   const searchNode = figma.currentPage.findAll((node) =>
