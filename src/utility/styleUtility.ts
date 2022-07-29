@@ -45,10 +45,10 @@ const loadBrandColor = () => {
   }
 };
 
-function loadLocalStyle(): ColorStyle[] {
+function loadStyle(styles:PaintStyle[]) {
   let allStyle: ColorStyle[] = [];
 
-  figma.getLocalPaintStyles().forEach((colorStyle) => {
+  styles.forEach((colorStyle) => {
     if (colorStyle.paints.length === 0) {
       allStyle.push({
         type: "SOLID",
@@ -88,6 +88,10 @@ function loadLocalStyle(): ColorStyle[] {
   return allStyle;
 }
 
+function loadLocalStyle(): ColorStyle[] {
+  return loadStyle(figma.getLocalPaintStyles());
+}
+
 function getReferenceName(name: string): string {
   let rName = name
     .split("/")
@@ -102,3 +106,6 @@ function getReferenceName(name: string): string {
 
 export { loadLocalStyle, getReferenceName, loadBrandColor };
 export type { ColorStyle, BrandColorStyle };
+
+// For test
+export { loadStyle };

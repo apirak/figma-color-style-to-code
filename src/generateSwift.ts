@@ -14,7 +14,7 @@ let codeLocalStyle = (localStyle: ColorStyle[], brandStyle: BrandColorStyle): st
         return [
           `    @nonobjc public class var ${style.name}: UIColor {`,
           `        return ${style.UIColor}`,
-          ``,
+          `    }`,
         ].join("\n");
       } else {
         let color = brandStyle[style.color]
@@ -23,7 +23,7 @@ let codeLocalStyle = (localStyle: ColorStyle[], brandStyle: BrandColorStyle): st
         return [
           `    @nonobjc public class var ${style.name}: UIColor {`,
           `        dynamicColor(day: ${color}, night: ${color})`,
-          ``,
+          `    }`,
         ].join("\n");
       }
     })
@@ -57,3 +57,6 @@ let startPlugin = () => {
 };
 
 export default startPlugin;
+
+// export for test
+export { codeLocalStyle }
