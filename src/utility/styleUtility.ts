@@ -26,6 +26,30 @@ let isSolidPaints = (
   return false
 }
 
+function getReferenceName(name: string): string {
+  let rName = name
+    .split('/')
+    .filter((path: string) => !!path)
+    .map((n) => {
+      let n2 = n.trim().replaceAll(' ', '_')
+      return n2[0] != undefined ? n2[0].toLowerCase() + n2.slice(1) : ''
+    })
+    .join('__')
+  return rName
+}
+
+function getDesignTokenName(name: string): string {
+  let dName = name
+    .split('/')
+    .filter((path: string) => !!path)
+    .map((n) => {
+      let n2 = n.trim().replaceAll(' ', '_')
+      return n2[0] != undefined ? n2[0].toLowerCase() + n2.slice(1) : ''
+    })
+    .join('.')
+  return dName
+}
+
 const loadBrandColor = () => {
   const searchBrandNode = figma.currentPage.findAll((node) =>
     /#brand_color.json/.test(node.name)
@@ -85,30 +109,6 @@ function loadStyle(styles: PaintStyle[]) {
 
 function loadLocalStyle(): ColorStyle[] {
   return loadStyle(figma.getLocalPaintStyles())
-}
-
-function getReferenceName(name: string): string {
-  let rName = name
-    .split('/')
-    .filter((path: string) => !!path)
-    .map((n) => {
-      let n2 = n.trim().replaceAll(' ', '_')
-      return n2[0] != undefined ? n2[0].toLowerCase() + n2.slice(1) : ''
-    })
-    .join('__')
-  return rName
-}
-
-function getDesignTokenName(name: string): string {
-  let dName = name
-    .split('/')
-    .filter((path: string) => !!path)
-    .map((n) => {
-      let n2 = n.trim().replaceAll(' ', '_')
-      return n2[0] != undefined ? n2[0].toLowerCase() + n2.slice(1) : ''
-    })
-    .join('.')
-  return dName
 }
 
 export { loadLocalStyle, getReferenceName, loadBrandColor, getDesignTokenName }

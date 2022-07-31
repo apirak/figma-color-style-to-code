@@ -47,7 +47,7 @@
       },
       "-",
       {
-        "name": "Add Reference",
+        "name": "Add Reference in Description",
         "main": "src/addRefForDesignToken.ts"
       }
     ]
