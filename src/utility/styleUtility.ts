@@ -4,6 +4,7 @@ import { gradientString } from './gradientUtility'
 type ColorStyle = {
   type: string
   name: string
+  designTokenName: string
   color: string
   colorRGB?: string
   UIColor?: string
@@ -53,6 +54,7 @@ function loadStyle(styles: PaintStyle[]) {
       allStyle.push({
         type: 'SOLID',
         name: getReferenceName(colorStyle.name),
+        designTokenName: getDesignTokenName(colorStyle.name),
         color: '#00000000',
         colorRGB: 'rgba(0, 0, 0, 0)',
         UIColor: 'UIColor(red: 0.0, green: 0.0, blue: 0.0 , alpha: 0.0)',
@@ -65,6 +67,7 @@ function loadStyle(styles: PaintStyle[]) {
         allStyle.push({
           type: paint.type,
           name: getReferenceName(colorStyle.name),
+          designTokenName: getDesignTokenName(colorStyle.name),
           color: colorToHex(paint.color, paint.opacity),
           colorRGB: colorToRgb(paint.color, paint.opacity),
           UIColor: colorToUIColor(paint.color, paint.opacity),
@@ -76,6 +79,7 @@ function loadStyle(styles: PaintStyle[]) {
         allStyle.push({
           type: paint.type,
           name: getReferenceName(colorStyle.name),
+          designTokenName: getDesignTokenName(colorStyle.name),
           color: gradientString(paint, colorToHex, colorToRgb),
           colorRGB: gradientString(paint, colorToRgb, colorToRgb),
           UIColor: '',
@@ -103,7 +107,11 @@ function getReferenceName(name: string): string {
   return rName
 }
 
-export { loadLocalStyle, getReferenceName, loadBrandColor }
+function getDesignTokenName(name: string): string {
+  return name
+}
+
+export { loadLocalStyle, getReferenceName, loadBrandColor, getDesignTokenName }
 export type { ColorStyle, BrandColorStyle }
 
 // For test

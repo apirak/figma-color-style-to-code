@@ -83,6 +83,6 @@ export function gradientString(
       }
       return color + ' ' + getPosition(stop, gradientTransform) + '%'
     })
-    .join(',')
+    .join(', ')
   return `linear-gradient( ${gradientTransformString}, ${gradientStopString} )`
 }
