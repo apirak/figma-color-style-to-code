@@ -1,4 +1,4 @@
-import { colorToRgb, rgbToHex, colorToUIColor } from './colorUtility'
+import { colorToRgb, colorToOpacityHex, colorToUIColor } from './colorUtility'
 import { gradientString } from './gradientUtility'
 
 type ColorStyle = {
@@ -24,14 +24,6 @@ let isSolidPaints = (
     }
   }
   return false
-}
-
-export function colorToHex(color: RGB, opacity: number | undefined): string {
-  const a =
-    opacity == 1 || opacity == undefined
-      ? ''
-      : Math.round(opacity * 255).toString(16)
-  return rgbToHex(color['r'], color['g'], color['b']) + a
 }
 
 const loadBrandColor = () => {
@@ -68,7 +60,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: getReferenceName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
-          color: colorToHex(paint.color, paint.opacity),
+          color: colorToOpacityHex(paint.color, paint.opacity),
           colorRGB: colorToRgb(paint.color, paint.opacity),
           UIColor: colorToUIColor(paint.color, paint.opacity),
           opacity: paint.opacity,
@@ -80,7 +72,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: getReferenceName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
-          color: gradientString(paint, colorToHex, colorToRgb),
+          color: gradientString(paint, colorToOpacityHex, colorToRgb),
           colorRGB: gradientString(paint, colorToRgb, colorToRgb),
           UIColor: '',
           opacity: paint.opacity,
@@ -108,7 +100,15 @@ function getReferenceName(name: string): string {
 }
 
 function getDesignTokenName(name: string): string {
-  return name
+  let dName = name
+    .split('/')
+    .filter((path: string) => !!path)
+    .map((n) => {
+      let n2 = n.trim().replaceAll(' ', '_')
+      return n2[0] != undefined ? n2[0].toLowerCase() + n2.slice(1) : ''
+    })
+    .join('.')
+  return dName
 }
 
 export { loadLocalStyle, getReferenceName, loadBrandColor, getDesignTokenName }

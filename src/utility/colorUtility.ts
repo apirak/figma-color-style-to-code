@@ -18,6 +18,17 @@ export function colorToHex(color: RGB, opacity: number | undefined): string {
   return rgbToHex(color['r'], color['g'], color['b']) + a
 }
 
+export function colorToOpacityHex(
+  color: RGB,
+  opacity: number | undefined
+): string {
+  const a =
+    opacity == 1 || opacity == undefined
+      ? ''
+      : Math.round(opacity * 255).toString(16)
+  return rgbToHex(color['r'], color['g'], color['b']) + a
+}
+
 export function rgbToHSB(r: number, g: number, b: number) {
   let v = Math.max(r, g, b),
     c = v - Math.min(r, g, b)

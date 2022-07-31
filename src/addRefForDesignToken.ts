@@ -3,8 +3,10 @@ import {
   loadLocalStyle,
   BrandColorStyle,
   loadBrandColor,
+  getDesignTokenName,
 } from './utility/styleUtility'
 import { addText, updateText } from './utility/textUtility'
+import { colorToOpacityHex } from './utility/colorUtility'
 
 // let codeLocalStyle = (
 //   localStyle: ColorStyle[],
@@ -25,26 +27,47 @@ import { addText, updateText } from './utility/textUtility'
 //     .join('\n')
 // }
 
-let startPlugin = () => {
-  // let localStyle: ColorStyle[] = loadLocalStyle()
-
-  let allStyles = figma.getLocalPaintStyles()
-  // console.log("allStyle", allStyles);
-  // console.log("style paints", allStyles[0].paints);
-
-  let refFolder = 'Branding'
-  // let brandStyle: BrandColorStyle = {}
-  let brandColor: BrandColorStyle = loadBrandColor()
-
-  //Read brand color
+let loadBrandStyleForToken = (allStyles: PaintStyle[]): BrandColorStyle => {
+  let brandStyle: BrandColorStyle = {}
   allStyles
     .filter((style) => style.paints[0].type === 'SOLID')
-    .filter((style) => style.name.includes(refFolder))
     .forEach((style) => {
       // brandStyle[style.paints[0]] = style.name
-      console.log('name', style.name)
-      console.log('discription', style.description)
+      if (style.paints[0] != null && style.paints[0].type === 'SOLID') {
+        let hexColor = colorToOpacityHex(
+          style.paints[0].color,
+          style.paints[0].opacity
+        )
+        let tokenName = getDesignTokenName(style.name)
+        brandStyle[hexColor] = tokenName
+      }
     })
+  return brandStyle
+}
+
+let startPlugin = () => {
+  // let localStyle: ColorStyle[] = loadLocalSt.le()
+  let refFolder = 'Branding'
+  let allBrandStyles = figma
+    .getLocalPaintStyles()
+    .filter((style) => style.name.includes(refFolder))
+  let allLocalStyles = figma
+    .getLocalPaintStyles()
+    .filter((style) => !style.name.includes(refFolder))
+
+  let brandStyle: BrandColorStyle = loadBrandStyleForToken(allBrandStyles)
+
+  allLocalStyles.forEach((style) => {
+    let description = style.description
+    description.split('\n').map((line) => {
+      return line + 'x'
+    })
+
+    console.log('description', description)
+    // let str = style.description + '\n' + 'ref:xxx'
+    // str.replace(/ref:(.*?)(\n|$)/g, 'ref:abc')
+    // console.log('abc', str)
+  })
   // let codeAllStyle: string = codeLocalStyle(localStyle, brandColor)
 
   // let codeColor = [
