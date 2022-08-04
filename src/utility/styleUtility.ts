@@ -6,6 +6,7 @@ type ColorStyle = {
   name: string
   designTokenName: string
   codeName: string
+  snakeCodeName: string
   color: string
   colorRGB?: string
   UIColor?: string
@@ -32,11 +33,37 @@ function getReferenceName(name: string): string {
     .split('/')
     .filter((path: string) => !!path)
     .map((n) => {
-      let n2 = n.trim().replaceAll(' ', '_')
-      return n2[0] != undefined ? n2[0].toLowerCase() + n2.slice(1) : ''
+      return n
+        .split(/(?=[A-Z, ])/)
+        .map((n2) => {
+          let n3 = n2.trim()
+          return n3[0] != undefined
+            ? n3[0].toUpperCase() + n3.slice(1).toLowerCase()
+            : ''
+        })
+        .join('')
+        .trim()
+        .replaceAll(' ', '')
     })
-    .join('__')
-  return rName
+    .join('')
+  return rName[0] != undefined ? rName[0].toLowerCase() + rName.slice(1) : ''
+}
+
+function getReferenceSnakeName(name: string): string {
+  let rName = name
+    .split('/')
+    .filter((path: string) => !!path)
+    .map((n) => {
+      return n
+        .split(/(?=[A-Z, ])/)
+        .filter((s) => s !== ' ')
+        .map((s) => {
+          return s.trim().toLowerCase()
+        })
+        .join('_')
+    })
+    .join('_')
+  return rName.toLowerCase()
 }
 
 function getDesignTokenName(name: string): string {
@@ -72,6 +99,7 @@ function loadStyle(styles: PaintStyle[]) {
         type: 'SOLID',
         name: colorStyle.name,
         codeName: getReferenceName(colorStyle.name),
+        snakeCodeName: getReferenceSnakeName(colorStyle.name),
         designTokenName: getDesignTokenName(colorStyle.name),
         color: '#00000000',
         colorRGB: 'rgba(0, 0, 0, 0)',
@@ -86,6 +114,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: colorStyle.name,
           codeName: getReferenceName(colorStyle.name),
+          snakeCodeName: getReferenceSnakeName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
           color: colorToOpacityHex(paint.color, paint.opacity),
           colorRGB: colorToRgb(paint.color, paint.opacity),
@@ -99,6 +128,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: colorStyle.name,
           codeName: getReferenceName(colorStyle.name),
+          snakeCodeName: getReferenceSnakeName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
           color: gradientString(paint, colorToOpacityHex, colorToRgb),
           colorRGB: gradientString(paint, colorToRgb, colorToRgb),
@@ -115,7 +145,13 @@ function loadLocalStyle(): ColorStyle[] {
   return loadStyle(figma.getLocalPaintStyles())
 }
 
-export { loadLocalStyle, getReferenceName, loadBrandColor, getDesignTokenName }
+export {
+  loadLocalStyle,
+  getReferenceName,
+  loadBrandColor,
+  getDesignTokenName,
+  getReferenceSnakeName,
+}
 export type { ColorStyle, BrandColorStyle }
 
 // For test
