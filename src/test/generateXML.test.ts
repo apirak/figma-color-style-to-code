@@ -10,9 +10,9 @@ describe('Separete Key from Name', () => {
 
   it('generate style without brand color', () => {
     let generatedCode = [
-      '    <color name="fill_style_1">#f2994a</color>',
-      '    <color name="fill_style_2">#fccc0066</color>',
-      '    <color name="fill_style_3">#fccce6</color>',
+      '    <color name="primary__fill_style_1">#f2994a</color>',
+      '    <color name="primary__fill_style_2">#fccc0066</color>',
+      '    <color name="secondary__fill_style_3">#fccce6</color>',
       '    <color name="fill_Style_4">#00000000</color>',
     ]
     expect(codeLocalStyle(localStyle, {})).toEqual(generatedCode.join('\n'))
@@ -20,10 +20,10 @@ describe('Separete Key from Name', () => {
 
   it('generate style with brand color', () => {
     let generatedCode = [
-      '    <color name="fill_style_1">@color.A__Color</color>',
-      '    <color name="fill_style_2">@color.B__Color</color>',
-      '    <color name="fill_style_3">#fccce6</color>',
-      '    <color name="fill_Style_4">@color.Blank__Color</color>',
+      '    <item name="primary__fill_style_1">@color.A__Color</item>',
+      '    <item name="primary__fill_style_2">@color.B__Color</item>',
+      '    <item name="secondary__fill_style_3">#fccce6</item>',
+      '    <item name="fill_Style_4">@color.Blank__Color</item>',
     ]
     expect(codeLocalStyle(localStyle, brandStyle)).toEqual(
       generatedCode.join('\n')

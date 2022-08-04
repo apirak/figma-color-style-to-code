@@ -15,7 +15,7 @@ let codeLocalStyle = (
     .map((style) => {
       if (Object.keys(brandStyle).length === 0) {
         return [
-          `    @nonobjc public class var ${style.name}: UIColor {`,
+          `    @nonobjc public class var ${style.codeName}: UIColor {`,
           `        return ${style.UIColor}`,
           `    }`,
         ].join('\n')
@@ -24,7 +24,7 @@ let codeLocalStyle = (
           ? `UIColor.${brandStyle[style.color]}`
           : style.UIColor
         return [
-          `    @nonobjc public class var ${style.name}: UIColor {`,
+          `    @nonobjc public class var ${style.codeName}: UIColor {`,
           `        dynamicColor(day: ${color}, night: ${color})`,
           `    }`,
         ].join('\n')

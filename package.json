@@ -41,14 +41,10 @@
         "name": "Generate Web SCSS",
         "main": "src/generateSCSS.ts"
       },
-      {
-        "name": "Generate Reference JSON",
-        "main": "src/generateJson.ts"
-      },
       "-",
       {
-        "name": "Add Reference in Description",
-        "main": "src/addRefForDesignToken.ts"
+        "name": "Generate Brand Reference",
+        "main": "src/generateJson.ts"
       }
     ]
   }

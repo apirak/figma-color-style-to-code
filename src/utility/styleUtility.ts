@@ -5,6 +5,7 @@ type ColorStyle = {
   type: string
   name: string
   designTokenName: string
+  codeName: string
   color: string
   colorRGB?: string
   UIColor?: string
@@ -69,7 +70,8 @@ function loadStyle(styles: PaintStyle[]) {
     if (colorStyle.paints.length === 0) {
       allStyle.push({
         type: 'SOLID',
-        name: getReferenceName(colorStyle.name),
+        name: colorStyle.name,
+        codeName: getReferenceName(colorStyle.name),
         designTokenName: getDesignTokenName(colorStyle.name),
         color: '#00000000',
         colorRGB: 'rgba(0, 0, 0, 0)',
@@ -82,7 +84,8 @@ function loadStyle(styles: PaintStyle[]) {
       if (paint.type == 'SOLID') {
         allStyle.push({
           type: paint.type,
-          name: getReferenceName(colorStyle.name),
+          name: colorStyle.name,
+          codeName: getReferenceName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
           color: colorToOpacityHex(paint.color, paint.opacity),
           colorRGB: colorToRgb(paint.color, paint.opacity),
@@ -94,7 +97,8 @@ function loadStyle(styles: PaintStyle[]) {
       if (paint.type == 'GRADIENT_LINEAR') {
         allStyle.push({
           type: paint.type,
-          name: getReferenceName(colorStyle.name),
+          name: colorStyle.name,
+          codeName: getReferenceName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
           color: gradientString(paint, colorToOpacityHex, colorToRgb),
           colorRGB: gradientString(paint, colorToRgb, colorToRgb),

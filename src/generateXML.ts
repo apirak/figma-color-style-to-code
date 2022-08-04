@@ -14,12 +14,12 @@ let codeLocalStyle = (
     .filter((style) => style.type === 'SOLID')
     .map((style) => {
       if (Object.keys(brandStyle).length === 0) {
-        return `    <color name="${style.name}">${style.color}</color>`
+        return `    <color name="${style.codeName}">${style.color}</color>`
       } else {
         let color = brandStyle[style.color]
           ? `@color.${brandStyle[style.color]}`
           : style.color
-        return `    <color name="${style.name}">${color}</color>`
+        return `    <item name="${style.codeName}">${color}</item>`
       }
     })
     .join('\n')
