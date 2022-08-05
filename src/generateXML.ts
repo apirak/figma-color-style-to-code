@@ -30,7 +30,7 @@ let codeLocalStyle = (
 const generateCode = (
   colorStyle: ColorStyle[],
   brandStyle: BrandColorStyle
-) => {
+): string => {
   const codeAllStyle: string = codeLocalStyle(colorStyle, brandStyle)
   return [
     `<?xml version="1.0" encoding="utf-8"?>`,
@@ -40,9 +40,66 @@ const generateCode = (
   ].join('\n')
 }
 
-// const generateThemesCode = (
-// dayStyle: ColorStyle[]
-// )
+const codeThemesStyle = (
+  themeStyle: ColorStyle[],
+  brandStyle: BrandColorStyle
+): string => {
+  return themeStyle
+    .filter((style) => style.type === 'SOLID')
+    .map((style) => {
+      let themeColor = brandStyle[style.color]
+        ? `@color/${brandStyle[style.color]}`
+        : style.color
+
+      return `    <item name="${style.codeName}">${themeColor}</item>`
+    })
+    .join('\n')
+}
+
+const generateThemesCode = (
+  dayStyle: ColorStyle[],
+  nightStyle: ColorStyle[],
+  brandStyle: BrandColorStyle
+): string => {
+  const codeDayStyle: string = codeThemesStyle(dayStyle, brandStyle)
+  const codeNightStyle: string = codeThemesStyle(nightStyle, brandStyle)
+  return [
+    '<?xml version="1.0" encoding="utf-8"?>',
+    '<resources>',
+    '  <style name="Theme.OneApp.Day" parent="Theme.MaterialComponents.Day.NoActionBar">',
+    codeDayStyle,
+    '  </style>',
+    '  <style name="Theme.OneApp.Night" parent="Theme.MaterialComponents.Night.NoActionBar">',
+    codeNightStyle,
+    '  </style>',
+    '</resource>',
+  ].join('\n')
+}
+
+const codeAttrStyle = (
+  dayStyle: ColorStyle[],
+  nightStyle: ColorStyle[]
+): string => {
+  return dayStyle
+    .filter((style) => style.type === 'SOLID')
+    .map((style) => `    <attr name="${style.codeName}" format="color">`)
+    .join('\n')
+}
+
+const generateAttrCode = (
+  dayStyle: ColorStyle[],
+  nightStyle: ColorStyle[]
+): string => {
+  const codeAllStyle: string = codeAttrStyle(dayStyle, nightStyle)
+  return [
+    '<?xml version="1.0" encoding="utf-8"?>',
+    '<resources>',
+    '   <declare-styleable name="OneApp">',
+    codeAllStyle,
+    '   </declare-styleable>',
+    '</resource>',
+  ].join('\n')
+}
 
 const startPluginGenerateAllLocal = async () => {
   const brandStyle = loadStyle(
@@ -50,7 +107,7 @@ const startPluginGenerateAllLocal = async () => {
       .getLocalPaintStyles()
       .filter((style) => style.name.includes('Branding'))
   )
-  const brandIndex = loadLocalBrandColor(brandStyle)
+  const brandIndex = loadLocalBrandColor(brandStyle, 'snakeCodeName')
   const dayStyle = loadStyle(
     figma.getLocalPaintStyles().filter((style) => style.name.includes('Day'))
   )
@@ -59,10 +116,13 @@ const startPluginGenerateAllLocal = async () => {
   )
 
   let brandCodeColor = generateCode(brandStyle, {})
+  let themesCodeColor = generateThemesCode(dayStyle, nightStyle, brandIndex)
+  let attrCodeColor = generateAttrCode(dayStyle, nightStyle)
 
   await Promise.all([
-    updateTextComponent('#branding_color.swift', brandCodeColor),
-    // updateTextComponent('#color.swift', componentCodeColor),
+    updateTextComponent('#color.xml', brandCodeColor),
+    updateTextComponent('#themes.xml', themesCodeColor),
+    updateTextComponent('#attr.xml', attrCodeColor),
   ])
 
   figma.closePlugin('done 🎉')
