@@ -1,9 +1,9 @@
 import { ColorStyle, BrandColorStyle } from '../utility/styleUtility'
 
 let brandStyle: BrandColorStyle = {
-  '#f2994a': 'A_Color',
-  '#fccc0066': 'B_Color',
-  '#00000000': 'Blank_Color',
+  '#f2994a': 'AColor',
+  '#fccc0066': 'BColor',
+  '#00000000': 'BlankColor',
 }
 
 let localStyle: ColorStyle[] = [
@@ -13,8 +13,8 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(242, 153, 74, 1)',
     name: 'Primary / fill style 1',
     designTokenName: 'primary.fill_style_1',
-    codeName: 'primary_fill_style_1',
-    snakeCodeName: 'primaryFillStyle1',
+    snakeCodeName: 'primary_fill_style_1',
+    codeName: 'primaryFillStyle1',
     opacity: 1,
     type: 'SOLID',
   },
@@ -24,8 +24,8 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(253, 204, 0, 0.4)',
     name: 'Primary / fill style 2',
     designTokenName: 'primary.fill_style_2',
-    codeName: 'primary_fill_style_2',
-    snakeCodeName: 'primaryFillStyle2',
+    snakeCodeName: 'primary_fill_style_2',
+    codeName: 'primaryFillStyle2',
     opacity: 0.4,
     type: 'SOLID',
   },
@@ -35,8 +35,8 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(253, 204, 230, 1)',
     name: 'Secondary / fill style 3',
     designTokenName: 'secondary.fill_style_3',
-    codeName: 'secondary_fill_style_3',
-    snakeCodeName: 'secondaryFillStyle3',
+    snakeCodeName: 'secondary_fill_style_3',
+    codeName: 'secondaryFillStyle3',
     opacity: 1,
     type: 'SOLID',
   },
@@ -46,8 +46,8 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(0, 0, 0, 0)',
     name: 'fill Style 4',
     designTokenName: 'fill_style_4',
-    codeName: 'fill_Style_4',
-    snakeCodeName: 'fillStyle4',
+    snakeCodeName: 'fill_Style_4',
+    codeName: 'fillStyle4',
     opacity: 0,
     type: 'SOLID',
   },

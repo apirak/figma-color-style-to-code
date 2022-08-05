@@ -20,10 +20,10 @@ describe('Separete Key from Name', () => {
 
   it('generate style with brand color', () => {
     let generatedCode = [
-      '    <item name="primary_fill_style_1">@color.A_Color</item>',
-      '    <item name="primary_fill_style_2">@color.B_Color</item>',
-      '    <item name="secondary_fill_style_3">#fccce6</item>',
-      '    <item name="fill_Style_4">@color.Blank_Color</item>',
+      '    <item name="primaryFillStyle1">@color.a_color</item>',
+      '    <item name="primaryFillStyle2">@color.b_color</item>',
+      '    <item name="secondaryFillStyle3">#fccce6</item>',
+      '    <item name="fillStyle4">@color.blank_Color</item>',
     ]
     expect(codeLocalStyle(localStyle, brandStyle)).toEqual(
       generatedCode.join('\n')
