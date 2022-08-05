@@ -46,6 +46,9 @@ function getReferenceName(name: string): string {
         .replaceAll(' ', '')
     })
     .join('')
+    .replace(/^Branding/, '')
+    .replace(/^Day/, '')
+    .replace(/^Night/, '')
   return rName[0] != undefined ? rName[0].toLowerCase() + rName.slice(1) : ''
 }
 
@@ -63,6 +66,9 @@ function getReferenceSnakeName(name: string): string {
         .join('_')
     })
     .join('_')
+    .replace(/^branding_/, '')
+    .replace(/^day_/, '')
+    .replace(/^night_/, '')
   return rName.toLowerCase()
 }
 
@@ -76,6 +82,16 @@ function getDesignTokenName(name: string): string {
     })
     .join('.')
   return dName
+}
+
+const loadLocalBrandColor = (localBrandStyle: ColorStyle[]) => {
+  let brandIndex: BrandColorStyle = {}
+  localBrandStyle
+    .filter((style) => style.type === 'SOLID')
+    .forEach((style) => {
+      brandIndex[style.color] = style.codeName
+    })
+  return brandIndex
 }
 
 const loadBrandColor = () => {
@@ -151,8 +167,7 @@ export {
   loadBrandColor,
   getDesignTokenName,
   getReferenceSnakeName,
+  loadStyle,
+  loadLocalBrandColor,
 }
 export type { ColorStyle, BrandColorStyle }
-
-// For test
-export { loadStyle }

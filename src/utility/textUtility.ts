@@ -42,3 +42,26 @@ export async function addTextNearSelected(
     elementNode.parent.appendChild(await textNode)
   }
 }
+
+export const updateTextComponent = async (
+  layerName: string,
+  codeColor: string
+): Promise<string> => {
+  var fileMatcher = new RegExp(`${layerName}`)
+  const searchNode = figma.currentPage.findAll((node) =>
+    fileMatcher.test(node.name)
+  )
+
+  if (searchNode.length != 0) {
+    if (searchNode[0].type == 'TEXT') {
+      let colorText = <TextNode>searchNode[0]
+      await updateText(colorText, codeColor)
+      return `Update ${layerName} 🎉`
+    } else {
+      return `Layer "${layerName}" is not text`
+    }
+  } else {
+    await addText(codeColor, 0, 0, layerName)
+    return `Added ${layerName} 🎉`
+  }
+}

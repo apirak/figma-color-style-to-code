@@ -70,4 +70,37 @@ describe('Separete Key from Name', () => {
       '_large_super_man'
     )
   })
+
+  it('Remove folder branding', () => {
+    expect(getReferenceSnakeName('Branding/Large/Super /man')).toEqual(
+      'large_super_man'
+    )
+    expect(getReferenceSnakeName('Branding//Large/Super /man')).toEqual(
+      'large_super_man'
+    )
+    expect(
+      getReferenceSnakeName('Branding/Large/Branding/Super/Sport')
+    ).toEqual('large_branding_super_sport')
+  })
+
+  it('Remove folder Day and Night', () => {
+    expect(getReferenceSnakeName('Day/Large/Super /man')).toEqual(
+      'large_super_man'
+    )
+    expect(getReferenceSnakeName('Day/Large/Super /man')).toEqual(
+      'large_super_man'
+    )
+    expect(getReferenceSnakeName('Night/Large/Super /man')).toEqual(
+      'large_super_man'
+    )
+    expect(getReferenceSnakeName('Night/Large/Super /man')).toEqual(
+      'large_super_man'
+    )
+    expect(getReferenceSnakeName('Day/Large Day/Super /man')).toEqual(
+      'large_day_super_man'
+    )
+    expect(getReferenceSnakeName('Night/Large Day/Super /man')).toEqual(
+      'large_day_super_man'
+    )
+  })
 })

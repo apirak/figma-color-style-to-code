@@ -45,6 +45,14 @@
       {
         "name": "Generate Brand Reference",
         "main": "src/generateJson.ts"
+      },
+      "-",
+      {
+        "name": "Generate All Swift",
+        "main": {
+          "handler": "stratPluginGenerateAllLocal",
+          "src": "src/generateSwift.ts"
+        }
       }
     ]
   }

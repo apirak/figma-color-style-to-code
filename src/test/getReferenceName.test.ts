@@ -7,6 +7,9 @@ describe('Separete Key from Name', () => {
     expect(getReferenceName('Large /Super')).toEqual('largeSuper')
     expect(getReferenceName('Large/Super')).toEqual('largeSuper')
     expect(getReferenceName('XXLarge/Super')).toEqual('xXLargeSuper')
+    expect(getReferenceName('Large/Super/Land/Man/Show/Spider/Man')).toEqual(
+      'largeSuperLandManShowSpiderMan'
+    )
   })
 
   it('Lower case on first name', () => {
@@ -44,5 +47,30 @@ describe('Separete Key from Name', () => {
     expect(getReferenceName('//Large/Super /man')).toEqual('largeSuperMan')
     expect(getReferenceName('///Large/Super /man')).toEqual('largeSuperMan')
     expect(getReferenceName('/ /Large/Super /man')).toEqual('largeSuperMan')
+  })
+
+  it('Remove folder branding', () => {
+    expect(getReferenceName('Branding/Large/Super /man')).toEqual(
+      'largeSuperMan'
+    )
+    expect(getReferenceName('Branding//Large/Super /man')).toEqual(
+      'largeSuperMan'
+    )
+    expect(getReferenceName('Branding/Large/Branding/Super/Sport')).toEqual(
+      'largeBrandingSuperSport'
+    )
+  })
+
+  it('Remove folder Day and Night', () => {
+    expect(getReferenceName('Day/Large/Super /man')).toEqual('largeSuperMan')
+    expect(getReferenceName('Day/Large/Super /man')).toEqual('largeSuperMan')
+    expect(getReferenceName('Night/Large/Super /man')).toEqual('largeSuperMan')
+    expect(getReferenceName('Night/Large/Super /man')).toEqual('largeSuperMan')
+    expect(getReferenceName('Day/Large Day/Super /man')).toEqual(
+      'largeDaySuperMan'
+    )
+    expect(getReferenceName('Night/Large Day/Super /man')).toEqual(
+      'largeDaySuperMan'
+    )
   })
 })
