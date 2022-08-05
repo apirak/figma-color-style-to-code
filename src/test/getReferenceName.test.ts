@@ -49,6 +49,31 @@ describe('Separete Key from Name', () => {
     expect(getReferenceName('/ /Large/Super /man')).toEqual('largeSuperMan')
   })
 
+  it('Should remove underscore', () => {
+    expect(getReferenceName('Large / Super_man')).toEqual('largeSuperMan')
+    expect(getReferenceName('Large /  Super_man_land')).toEqual(
+      'largeSuperManLand'
+    )
+    expect(getReferenceName('Large /Super spider_Launch')).toEqual(
+      'largeSuperSpiderLaunch'
+    )
+    expect(getReferenceName('Large/_Super_do_not_love')).toEqual(
+      'largeSuperDoNotLove'
+    )
+  })
+
+  it('Should replace % with opacity', () => {
+    expect(getReferenceName('Large / Spider 10%')).toEqual(
+      'largeSpiderOpacity10'
+    )
+    expect(getReferenceName('Large / Spider_10%')).toEqual(
+      'largeSpiderOpacity10'
+    )
+    expect(getReferenceName('Large / Spider_10% / abc')).toEqual(
+      'largeSpiderOpacity10Abc'
+    )
+  })
+
   it('Remove folder branding', () => {
     expect(getReferenceName('Branding/Large/Super /man')).toEqual(
       'largeSuperMan'

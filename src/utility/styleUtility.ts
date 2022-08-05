@@ -30,19 +30,18 @@ let isSolidPaints = (
 
 function getReferenceName(name: string): string {
   let rName = name
-    .split('/')
+    .split(/[\/ _]/)
     .filter((path: string) => !!path)
     .map((n) => {
       return n
-        .split(/(?=[A-Z, ])/)
+        .split(/(?=[A-Z])/)
         .map((n2) => {
-          let n3 = n2.trim()
-          return n3[0] != undefined
-            ? n3[0].toUpperCase() + n3.slice(1).toLowerCase()
+          return n2 != undefined
+            ? n2[0].toUpperCase() + n2.slice(1).toLowerCase()
             : ''
         })
         .join('')
-        .trim()
+        .replace(/(.*?)\%/, 'Opacity$1')
         .replaceAll(' ', '')
     })
     .join('')
@@ -54,16 +53,17 @@ function getReferenceName(name: string): string {
 
 function getReferenceSnakeName(name: string): string {
   let rName = name
-    .split('/')
+    .split(/[\/ _]/)
     .filter((path: string) => !!path)
     .map((n) => {
       return n
-        .split(/(?=[A-Z, ])/)
+        .split(/(?=[A-Z])/)
         .filter((s) => s !== ' ')
         .map((s) => {
           return s.trim().toLowerCase()
         })
         .join('_')
+        .replace(/(.*?)\%/, 'opacity_$1')
     })
     .join('_')
     .replace(/^branding_/, '')

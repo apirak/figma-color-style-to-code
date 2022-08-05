@@ -67,7 +67,34 @@ describe('Separete Key from Name', () => {
       'large_super_man'
     )
     expect(getReferenceSnakeName('/ /Large/Super /man')).toEqual(
-      '_large_super_man'
+      'large_super_man'
+    )
+  })
+
+  it('Should remain underscore', () => {
+    expect(getReferenceSnakeName('Large / Super_man')).toEqual(
+      'large_super_man'
+    )
+    expect(getReferenceSnakeName('Large /  Super_man_land')).toEqual(
+      'large_super_man_land'
+    )
+    expect(getReferenceSnakeName('Large /Super spider_Launch')).toEqual(
+      'large_super_spider_launch'
+    )
+    expect(getReferenceSnakeName('Large/_Super_do_not_love')).toEqual(
+      'large_super_do_not_love'
+    )
+  })
+
+  it('Should replace % with opacity', () => {
+    expect(getReferenceSnakeName('Large / Spider 10%')).toEqual(
+      'large_spider_opacity_10'
+    )
+    expect(getReferenceSnakeName('Large / Spider_10%')).toEqual(
+      'large_spider_opacity_10'
+    )
+    expect(getReferenceSnakeName('Large / Spider_10% / abc')).toEqual(
+      'large_spider_opacity_10_abc'
     )
   })
 

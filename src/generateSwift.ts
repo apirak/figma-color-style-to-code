@@ -95,7 +95,7 @@ const generateDayNightCode = (
   return [`extension UIColor {`, codeAllStyle, `}`].join('\n')
 }
 
-const stratPluginGenerateAllLocal = async () => {
+const startPluginGenerateAllLocal = async () => {
   const brandStyle = loadStyle(
     figma
       .getLocalPaintStyles()

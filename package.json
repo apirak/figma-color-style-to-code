@@ -48,10 +48,17 @@
       },
       "-",
       {
-        "name": "Generate All Swift",
+        "name": "Generate All iOS Swift",
         "main": {
           "handler": "startPluginGenerateAllLocal",
           "src": "src/generateSwift.ts"
+        }
+      },
+      {
+        "name": "Generate All Android XML",
+        "main": {
+          "handler": "startPluginGenerateAllLocal",
+          "src": "src/generateXML.ts"
         }
       }
     ]

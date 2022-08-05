@@ -3,8 +3,10 @@ import {
   loadLocalStyle,
   BrandColorStyle,
   loadBrandColor,
+  loadStyle,
+  loadLocalBrandColor,
 } from './utility/styleUtility'
-import { addText, updateText } from './utility/textUtility'
+import { updateTextComponent } from './utility/textUtility'
 
 let codeLocalStyle = (
   localStyle: ColorStyle[],
@@ -25,37 +27,53 @@ let codeLocalStyle = (
     .join('\n')
 }
 
-let startPlugin = () => {
-  let localStyle: ColorStyle[] = loadLocalStyle()
-  let brandColor: BrandColorStyle = loadBrandColor()
-  let codeAllStyle: string = codeLocalStyle(localStyle, brandColor)
-  let codeColor = [
+const generateCode = (
+  colorStyle: ColorStyle[],
+  brandStyle: BrandColorStyle
+) => {
+  const codeAllStyle: string = codeLocalStyle(colorStyle, brandStyle)
+  return [
     `<?xml version="1.0" encoding="utf-8"?>`,
     `<resources>`,
     codeAllStyle,
     `</resources>`,
   ].join('\n')
-
-  const searchNode = figma.currentPage.findAll((node) =>
-    /#color.xml/.test(node.name)
-  )
-
-  if (searchNode.length != 0) {
-    if (searchNode[0].type == 'TEXT') {
-      let colorText = <TextNode>searchNode[0]
-      updateText(colorText, codeColor).then(() => {
-        figma.closePlugin(`Update color.xml 🎉`)
-      })
-    } else {
-      figma.closePlugin(`Layer "#color.xml" is not text`)
-    }
-  } else {
-    addText(codeColor, 0, 0, '#color.xml').then(() => {
-      figma.closePlugin(`Added color.xml 🎉`)
-    })
-  }
 }
 
+const startPluginGenerateAllLocal = async () => {
+  const brandStyle = loadStyle(
+    figma
+      .getLocalPaintStyles()
+      .filter((style) => style.name.includes('Branding'))
+  )
+  const brandIndex = loadLocalBrandColor(brandStyle)
+  const dayStyle = loadStyle(
+    figma.getLocalPaintStyles().filter((style) => style.name.includes('Day'))
+  )
+  const nightStyle = loadStyle(
+    figma.getLocalPaintStyles().filter((style) => style.name.includes('Night'))
+  )
+
+  let brandCodeColor = generateCode(brandStyle, {})
+
+  await Promise.all([
+    updateTextComponent('#branding_color.swift', brandCodeColor),
+    // updateTextComponent('#color.swift', componentCodeColor),
+  ])
+
+  figma.closePlugin('done 🎉')
+}
+
+let startPlugin = () => {
+  let localStyle: ColorStyle[] = loadLocalStyle()
+  let brandColor: BrandColorStyle = loadBrandColor()
+  let codeColor = generateCode(localStyle, brandColor)
+  updateTextComponent('#color.xml', codeColor).then((closeNote: string) => {
+    figma.closePlugin(closeNote)
+  })
+}
+
+export { startPluginGenerateAllLocal }
 export default startPlugin
 
 // export for test
