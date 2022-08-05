@@ -10,9 +10,9 @@ describe('Separete Key from Name', () => {
 
   it('generate style without brand color', () => {
     let generatedCode = [
-      '$primary__fill_style_1: #f2994a;',
-      '$primary__fill_style_2: rgba(253, 204, 0, 0.4);',
-      '$secondary__fill_style_3: #fccce6;',
+      '$primary_fill_style_1: #f2994a;',
+      '$primary_fill_style_2: rgba(253, 204, 0, 0.4);',
+      '$secondary_fill_style_3: #fccce6;',
       '$fill_Style_4: rgba(0, 0, 0, 0);',
     ]
     expect(codeLocalStyle(localStyle, {})).toEqual(generatedCode.join('\n'))
@@ -20,10 +20,10 @@ describe('Separete Key from Name', () => {
 
   it('generate style with brand color', () => {
     let generatedCode = [
-      '$primary__fill_style_1: $A__Color',
-      '$primary__fill_style_2: $B__Color',
-      '$secondary__fill_style_3: #fccce6',
-      '$fill_Style_4: $Blank__Color',
+      '$primary_fill_style_1: $A_Color',
+      '$primary_fill_style_2: $B_Color',
+      '$secondary_fill_style_3: #fccce6',
+      '$fill_Style_4: $Blank_Color',
     ]
     expect(codeLocalStyle(localStyle, brandStyle)).toEqual(
       generatedCode.join('\n')

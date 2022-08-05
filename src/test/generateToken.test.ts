@@ -47,9 +47,9 @@ describe('Separete Key from Name', () => {
 
   it('generate style with brand color', () => {
     let brandAllStyle = allStyle
-      .replace('#f2994a', 'A__Color')
-      .replace('#fccc0066', 'B__Color')
-      .replace('#00000000', 'Blank__Color')
+      .replace('#f2994a', 'A_Color')
+      .replace('#fccc0066', 'B_Color')
+      .replace('#00000000', 'Blank_Color')
     expect('x').toEqual('x')
     // expect(codeLocalStyle(localStyle, brandStyle)).toEqual(brandAllStyle)
   })

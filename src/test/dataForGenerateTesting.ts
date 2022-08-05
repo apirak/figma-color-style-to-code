@@ -1,9 +1,9 @@
 import { ColorStyle, BrandColorStyle } from '../utility/styleUtility'
 
 let brandStyle: BrandColorStyle = {
-  '#f2994a': 'A__Color',
-  '#fccc0066': 'B__Color',
-  '#00000000': 'Blank__Color',
+  '#f2994a': 'A_Color',
+  '#fccc0066': 'B_Color',
+  '#00000000': 'Blank_Color',
 }
 
 let localStyle: ColorStyle[] = [
@@ -13,7 +13,7 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(242, 153, 74, 1)',
     name: 'Primary / fill style 1',
     designTokenName: 'primary.fill_style_1',
-    codeName: 'primary__fill_style_1',
+    codeName: 'primary_fill_style_1',
     snakeCodeName: 'primaryFillStyle1',
     opacity: 1,
     type: 'SOLID',
@@ -24,7 +24,7 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(253, 204, 0, 0.4)',
     name: 'Primary / fill style 2',
     designTokenName: 'primary.fill_style_2',
-    codeName: 'primary__fill_style_2',
+    codeName: 'primary_fill_style_2',
     snakeCodeName: 'primaryFillStyle2',
     opacity: 0.4,
     type: 'SOLID',
@@ -35,7 +35,7 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(253, 204, 230, 1)',
     name: 'Secondary / fill style 3',
     designTokenName: 'secondary.fill_style_3',
-    codeName: 'secondary__fill_style_3',
+    codeName: 'secondary_fill_style_3',
     snakeCodeName: 'secondaryFillStyle3',
     opacity: 1,
     type: 'SOLID',
