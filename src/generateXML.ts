@@ -16,7 +16,7 @@ let codeLocalStyle = (
     .filter((style) => style.type === 'SOLID')
     .map((style) => {
       if (Object.keys(brandStyle).length === 0) {
-        return `    <color name="${style.codeName}">${style.color}</color>`
+        return `    <color name="${style.snakeCodeName}">${style.color}</color>`
       } else {
         let color = brandStyle[style.color]
           ? `@color.${brandStyle[style.color]}`
@@ -39,6 +39,10 @@ const generateCode = (
     `</resources>`,
   ].join('\n')
 }
+
+// const generateThemesCode = (
+// dayStyle: ColorStyle[]
+// )
 
 const startPluginGenerateAllLocal = async () => {
   const brandStyle = loadStyle(

@@ -1,4 +1,4 @@
-import { brandStyle, localStyle } from './dataForGenerateTesting'
+import { brandStyleSnake, localStyle } from './dataForGenerateTesting'
 import { createFigma } from 'figma-api-stub'
 import { codeLocalStyle } from '../generateXML'
 
@@ -23,9 +23,9 @@ describe('Separete Key from Name', () => {
       '    <item name="primaryFillStyle1">@color.a_color</item>',
       '    <item name="primaryFillStyle2">@color.b_color</item>',
       '    <item name="secondaryFillStyle3">#fccce6</item>',
-      '    <item name="fillStyle4">@color.blank_Color</item>',
+      '    <item name="fillStyle4">@color.blank_color</item>',
     ]
-    expect(codeLocalStyle(localStyle, brandStyle)).toEqual(
+    expect(codeLocalStyle(localStyle, brandStyleSnake)).toEqual(
       generatedCode.join('\n')
     )
   })

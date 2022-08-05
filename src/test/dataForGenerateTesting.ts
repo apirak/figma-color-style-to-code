@@ -1,12 +1,18 @@
 import { ColorStyle, BrandColorStyle } from '../utility/styleUtility'
 
-let brandStyle: BrandColorStyle = {
+const brandStyle: BrandColorStyle = {
   '#f2994a': 'AColor',
   '#fccc0066': 'BColor',
   '#00000000': 'BlankColor',
 }
 
-let localStyle: ColorStyle[] = [
+const brandStyleSnake: BrandColorStyle = {
+  '#f2994a': 'a_color',
+  '#fccc0066': 'b_color',
+  '#00000000': 'blank_color',
+}
+
+const localStyle: ColorStyle[] = [
   {
     UIColor: 'UIColor(red: 0.95, green: 0.60, blue: 0.29 , alpha: 1.00)',
     color: '#f2994a',
@@ -53,4 +59,4 @@ let localStyle: ColorStyle[] = [
   },
 ]
 
-export { brandStyle, localStyle }
+export { brandStyle, brandStyleSnake, localStyle }

@@ -13,6 +13,8 @@ type ColorStyle = {
   opacity?: number
 }
 
+type NameType = 'codeName' | 'designTokenName' | 'snakeCodeName' | 'name'
+
 type BrandColorStyle = { [key: string]: string }
 
 let isSolidPaints = (
@@ -84,12 +86,15 @@ function getDesignTokenName(name: string): string {
   return dName
 }
 
-const loadLocalBrandColor = (localBrandStyle: ColorStyle[]) => {
+const loadLocalBrandColor = (
+  localBrandStyle: ColorStyle[],
+  nametype: NameType = 'codeName'
+) => {
   let brandIndex: BrandColorStyle = {}
   localBrandStyle
     .filter((style) => style.type === 'SOLID')
     .forEach((style) => {
-      brandIndex[style.color] = style.codeName
+      brandIndex[style.color] = style[nametype]
     })
   return brandIndex
 }

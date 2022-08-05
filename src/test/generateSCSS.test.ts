@@ -1,4 +1,4 @@
-import { brandStyle, localStyle } from './dataForGenerateTesting'
+import { brandStyleSnake, localStyle } from './dataForGenerateTesting'
 import { createFigma } from 'figma-api-stub'
 import { codeLocalStyle } from '../generateSCSS'
 
@@ -20,12 +20,12 @@ describe('Separete Key from Name', () => {
 
   it('generate style with brand color', () => {
     let generatedCode = [
-      '$primary_fill_style_1: $A_Color',
-      '$primary_fill_style_2: $B_Color',
+      '$primary_fill_style_1: $a_color',
+      '$primary_fill_style_2: $b_color',
       '$secondary_fill_style_3: #fccce6',
-      '$fill_Style_4: $Blank_Color',
+      '$fill_Style_4: $blank_color',
     ]
-    expect(codeLocalStyle(localStyle, brandStyle)).toEqual(
+    expect(codeLocalStyle(localStyle, brandStyleSnake)).toEqual(
       generatedCode.join('\n')
     )
   })

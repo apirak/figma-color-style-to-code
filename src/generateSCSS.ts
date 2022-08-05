@@ -14,14 +14,14 @@ let codeLocalStyle = (
     .map((style) => {
       if (Object.keys(brandStyle).length === 0) {
         let colorText = style.opacity === 1 ? style.color : style.colorRGB
-        return `$${style.codeName}: ${colorText};`
+        return `$${style.snakeCodeName}: ${colorText};`
       } else {
         let color = brandStyle[style.color]
           ? `$${brandStyle[style.color]}`
           : style.opacity === 1
           ? style.color
           : style.colorRGB
-        return `$${style.codeName}: ${color}`
+        return `$${style.snakeCodeName}: ${color}`
       }
     })
     .join('\n')
