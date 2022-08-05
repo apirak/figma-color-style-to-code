@@ -47,11 +47,9 @@ const matchNightStyle = (
   dayStyle: ColorStyle,
   nightStyles: ColorStyle[]
 ): ColorStyle | undefined => {
-  // console.log('day Style', dayStyle)
   const filterNightStyle = nightStyles.filter((style) => {
     return style.codeName === dayStyle.codeName
   })
-  console.log('filterNightStyle:', filterNightStyle)
   return filterNightStyle.length !== 0 ? filterNightStyle[0] : undefined
 }
 
@@ -134,7 +132,7 @@ let startPlugin = () => {
   })
 }
 
-export { stratPluginGenerateAllLocal }
+export { startPluginGenerateAllLocal }
 export default startPlugin
 
 // export for test

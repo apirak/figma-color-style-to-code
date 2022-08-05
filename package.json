@@ -50,7 +50,7 @@
       {
         "name": "Generate All Swift",
         "main": {
-          "handler": "stratPluginGenerateAllLocal",
+          "handler": "startPluginGenerateAllLocal",
           "src": "src/generateSwift.ts"
         }
       }
