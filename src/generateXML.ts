@@ -94,9 +94,9 @@ const generateAttrCode = (
   return [
     '<?xml version="1.0" encoding="utf-8"?>',
     '<resources>',
-    '   <declare-styleable name="OneApp">',
+    '  <declare-styleable name="OneApp">',
     codeAllStyle,
-    '   </declare-styleable>',
+    '  </declare-styleable>',
     '</resource>',
   ].join('\n')
 }
@@ -141,4 +141,4 @@ export { startPluginGenerateAllLocal }
 export default startPlugin
 
 // export for test
-export { codeLocalStyle }
+export { codeLocalStyle, generateCode, generateAttrCode, generateThemesCode }

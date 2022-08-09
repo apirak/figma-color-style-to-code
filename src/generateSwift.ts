@@ -136,4 +136,4 @@ export { startPluginGenerateAllLocal }
 export default startPlugin
 
 // export for test
-export { codeLocalStyle }
+export { codeLocalStyle, generateCode, generateDayNightCode }
