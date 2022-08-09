@@ -6,8 +6,12 @@ export const colorNumberToHex = (color: number): string => {
   return hex.length == 1 ? '0' + hex : hex
 }
 
+export function rgbToHexNumber(r: number, g: number, b: number): string {
+  return colorNumberToHex(r) + colorNumberToHex(g) + colorNumberToHex(b)
+}
+
 export function rgbToHex(r: number, g: number, b: number): string {
-  return '#' + colorNumberToHex(r) + colorNumberToHex(g) + colorNumberToHex(b)
+  return '#' + rgbToHexNumber(r, g, b)
 }
 
 export function colorToHex(color: RGB, opacity: number | undefined): string {
@@ -26,7 +30,7 @@ export function colorToOpacityHex(
     opacity == 1 || opacity == undefined
       ? ''
       : Math.round(opacity * 255).toString(16)
-  return rgbToHex(color['r'], color['g'], color['b']) + a
+  return `#${a}${rgbToHexNumber(color['r'], color['g'], color['b'])}`
 }
 
 export function rgbToHSB(r: number, g: number, b: number) {

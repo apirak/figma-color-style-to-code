@@ -13,7 +13,7 @@ describe('Separete Key from Name', () => {
       `"#f2994a":"primary_fill_style_1",`,
       `"#fccc0066":"primary_fill_style_2",`,
       `"#fccce6":"secondary_fill_style_3",`,
-      `"#00000000":"fill_Style_4"`,
+      `"#00000000":"fill_style_4"`,
     ]
     expect(codeLocalStyle(localStyle, {})).toEqual(generatedCode.join('\n'))
   })
@@ -23,7 +23,7 @@ describe('Separete Key from Name', () => {
       `"a_color":"primary_fill_style_1",`,
       `"b_color":"primary_fill_style_2",`,
       `"#fccce6":"secondary_fill_style_3",`,
-      `"blank_color":"fill_Style_4"`,
+      `"blank_color":"fill_style_4"`,
     ]
     expect(codeLocalStyle(localStyle, brandStyleSnake)).toEqual(
       generatedCode.join('\n')

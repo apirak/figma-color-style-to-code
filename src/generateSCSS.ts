@@ -23,7 +23,7 @@ let codeLocalStyle = (
           : style.opacity === 1
           ? style.color
           : style.colorRGB
-        return `$${style.snakeCodeName}: ${color}`
+        return `$${style.pascalCodeName}: ${color}`
       }
     })
     .join('\n')
@@ -46,9 +46,11 @@ const codeThemesStyle = (
     .map((style) => {
       let themeColor = brandStyle[style.color]
         ? `$${brandStyle[style.color]}`
-        : style.color
+        : style.opacity == 1
+        ? style.color
+        : style.colorRGB
 
-      return `$${style.snakeCodeName}: ${themeColor};`
+      return `        $${style.pascalCodeName}: ${themeColor};`
     })
     .join('\n')
 }
@@ -61,11 +63,14 @@ const generateThemesCode = (
   const codeDayStyle: string = codeThemesStyle(dayStyle, brandStyle)
   const codeNightStyle: string = codeThemesStyle(nightStyle, brandStyle)
   return [
-    '// Day Themes',
+    '$themes: (',
+    '    day: (',
     codeDayStyle,
-    '',
-    '// Night Themes',
+    '    ),',
+    '    night: (',
     codeNightStyle,
+    '    ),',
+    ');',
   ].join('\n')
 }
 

@@ -39,7 +39,7 @@ describe('Separete Key from Name', () => {
       '        dynamicColor(day: UIColor.lightOrange, night: UIColor.darkOrange)',
       '    }',
       '    @nonobjc public class var onPrimary: UIColor {',
-      '        dynamicColor(day: UIColor(red: 0.92, green: 0.92, blue: 0.92 , alpha: 1.00), night: UIColor(red: 0.78, green: 0.78, blue: 0.78 , alpha: 1.00))',
+      '        dynamicColor(day: UIColor(red: 0.92, green: 0.92, blue: 0.92 , alpha: 0.80), night: UIColor(red: 0.78, green: 0.78, blue: 0.78 , alpha: 1.00))',
       '    }',
       '}',
     ]

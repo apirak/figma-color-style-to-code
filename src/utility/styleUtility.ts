@@ -7,13 +7,19 @@ type ColorStyle = {
   designTokenName: string
   codeName: string
   snakeCodeName: string
+  pascalCodeName: string
   color: string
   colorRGB?: string
   UIColor?: string
   opacity?: number
 }
 
-type NameType = 'codeName' | 'designTokenName' | 'snakeCodeName' | 'name'
+type NameType =
+  | 'codeName'
+  | 'designTokenName'
+  | 'snakeCodeName'
+  | 'pascalCodeName'
+  | 'name'
 
 type BrandColorStyle = { [key: string]: string }
 
@@ -30,8 +36,8 @@ let isSolidPaints = (
   return false
 }
 
-function getReferenceName(name: string): string {
-  let rName = name
+function getReferencePascalName(name: string): string {
+  return name
     .split(/[\/ _]/)
     .filter((path: string) => !!path)
     .map((n) => {
@@ -50,6 +56,10 @@ function getReferenceName(name: string): string {
     .replace(/^Branding/, '')
     .replace(/^Day/, '')
     .replace(/^Night/, '')
+}
+
+function getReferenceName(name: string): string {
+  let rName = getReferencePascalName(name)
   return rName[0] != undefined ? rName[0].toLowerCase() + rName.slice(1) : ''
 }
 
@@ -120,6 +130,7 @@ function loadStyle(styles: PaintStyle[]) {
         type: 'SOLID',
         name: colorStyle.name,
         codeName: getReferenceName(colorStyle.name),
+        pascalCodeName: getReferencePascalName(colorStyle.name),
         snakeCodeName: getReferenceSnakeName(colorStyle.name),
         designTokenName: getDesignTokenName(colorStyle.name),
         color: '#00000000',
@@ -135,6 +146,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: colorStyle.name,
           codeName: getReferenceName(colorStyle.name),
+          pascalCodeName: getReferencePascalName(colorStyle.name),
           snakeCodeName: getReferenceSnakeName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
           color: colorToOpacityHex(paint.color, paint.opacity),
@@ -149,6 +161,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: colorStyle.name,
           codeName: getReferenceName(colorStyle.name),
+          pascalCodeName: getReferencePascalName(colorStyle.name),
           snakeCodeName: getReferenceSnakeName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
           color: gradientString(paint, colorToOpacityHex, colorToRgb),

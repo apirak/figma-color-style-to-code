@@ -13,7 +13,7 @@ describe('Separete Key from Name', () => {
       '    <color name="primary_fill_style_1">#f2994a</color>',
       '    <color name="primary_fill_style_2">#fccc0066</color>',
       '    <color name="secondary_fill_style_3">#fccce6</color>',
-      '    <color name="fill_Style_4">#00000000</color>',
+      '    <color name="fill_style_4">#00000000</color>',
     ]
     expect(codeLocalStyle(localStyle, {})).toEqual(generatedCode.join('\n'))
   })
