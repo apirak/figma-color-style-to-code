@@ -1,19 +1,26 @@
 import { ColorStyle, BrandColorStyle } from '../utility/styleUtility'
 
-let brandStyle: BrandColorStyle = {
-  '#f2994a': 'A__Color',
-  '#fccc0066': 'B__Color',
-  '#00000000': 'Blank__Color',
+const brandStyle: BrandColorStyle = {
+  '#f2994a': 'AColor',
+  '#fccc0066': 'BColor',
+  '#00000000': 'BlankColor',
 }
 
-let localStyle: ColorStyle[] = [
+const brandStyleSnake: BrandColorStyle = {
+  '#f2994a': 'a_color',
+  '#fccc0066': 'b_color',
+  '#00000000': 'blank_color',
+}
+
+const localStyle: ColorStyle[] = [
   {
     UIColor: 'UIColor(red: 0.95, green: 0.60, blue: 0.29 , alpha: 1.00)',
     color: '#f2994a',
     colorRGB: 'rgba(242, 153, 74, 1)',
     name: 'Primary / fill style 1',
     designTokenName: 'primary.fill_style_1',
-    codeName: 'primary__fill_style_1',
+    snakeCodeName: 'primary_fill_style_1',
+    codeName: 'primaryFillStyle1',
     opacity: 1,
     type: 'SOLID',
   },
@@ -23,7 +30,8 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(253, 204, 0, 0.4)',
     name: 'Primary / fill style 2',
     designTokenName: 'primary.fill_style_2',
-    codeName: 'primary__fill_style_2',
+    snakeCodeName: 'primary_fill_style_2',
+    codeName: 'primaryFillStyle2',
     opacity: 0.4,
     type: 'SOLID',
   },
@@ -33,7 +41,8 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(253, 204, 230, 1)',
     name: 'Secondary / fill style 3',
     designTokenName: 'secondary.fill_style_3',
-    codeName: 'secondary__fill_style_3',
+    snakeCodeName: 'secondary_fill_style_3',
+    codeName: 'secondaryFillStyle3',
     opacity: 1,
     type: 'SOLID',
   },
@@ -43,10 +52,137 @@ let localStyle: ColorStyle[] = [
     colorRGB: 'rgba(0, 0, 0, 0)',
     name: 'fill Style 4',
     designTokenName: 'fill_style_4',
-    codeName: 'fill_Style_4',
+    snakeCodeName: 'fill_Style_4',
+    codeName: 'fillStyle4',
     opacity: 0,
     type: 'SOLID',
   },
 ]
 
-export { brandStyle, localStyle }
+const brandingStyle: ColorStyle[] = [
+  {
+    type: 'SOLID',
+    name: 'Branding/Light Blue',
+    codeName: 'lightBlue',
+    snakeCodeName: 'light_blue',
+    designTokenName: 'branding.light_Blue',
+    color: '#229ebd',
+    colorRGB: 'rgba(34, 158, 189, 1)',
+    UIColor: 'UIColor(red: 0.13, green: 0.62, blue: 0.74 , alpha: 1.00)',
+    opacity: 1,
+  },
+  {
+    type: 'SOLID',
+    name: 'Branding/Light Orange',
+    codeName: 'lightOrange',
+    snakeCodeName: 'light_orange',
+    designTokenName: 'branding.light_Orange',
+    color: '#fd8503',
+    colorRGB: 'rgba(253, 133, 3, 1)',
+    UIColor: 'UIColor(red: 0.99, green: 0.52, blue: 0.01 , alpha: 1.00)',
+    opacity: 1,
+  },
+  {
+    type: 'SOLID',
+    name: 'Branding/Dark Blue',
+    codeName: 'darkBlue',
+    snakeCodeName: 'dark_blue',
+    designTokenName: 'branding.dark_Blue',
+    color: '#013147',
+    colorRGB: 'rgba(1, 49, 71, 1)',
+    UIColor: 'UIColor(red: 0.00, green: 0.19, blue: 0.28 , alpha: 1.00)',
+    opacity: 1,
+  },
+  {
+    type: 'SOLID',
+    name: 'Branding/Dark Orange',
+    codeName: 'darkOrange',
+    snakeCodeName: 'dark_orange',
+    designTokenName: 'branding.dark_Orange',
+    color: '#ffb70b',
+    colorRGB: 'rgba(255, 183, 11, 1)',
+    UIColor: 'UIColor(red: 1.00, green: 0.72, blue: 0.04 , alpha: 1.00)',
+    opacity: 1,
+  },
+]
+
+const dayStyle: ColorStyle[] = [
+  {
+    type: 'SOLID',
+    name: 'Day / Primary',
+    codeName: 'primary',
+    snakeCodeName: 'primary',
+    designTokenName: 'day.primary',
+    color: '#229ebd',
+    colorRGB: 'rgba(34, 158, 189, 1)',
+    UIColor: 'UIColor(red: 0.13, green: 0.62, blue: 0.74 , alpha: 1.00)',
+    opacity: 1,
+  },
+  {
+    type: 'SOLID',
+    name: 'Day / Secondary',
+    codeName: 'secondary',
+    snakeCodeName: 'secondary',
+    designTokenName: 'day.secondary',
+    color: '#fd8503',
+    colorRGB: 'rgba(253, 133, 3, 1)',
+    UIColor: 'UIColor(red: 0.99, green: 0.52, blue: 0.01 , alpha: 1.00)',
+    opacity: 1,
+  },
+  {
+    type: 'SOLID',
+    name: 'Day/on Primary',
+    codeName: 'onPrimary',
+    snakeCodeName: 'on_primary',
+    designTokenName: 'day.on_Primary',
+    color: '#ebebeb',
+    colorRGB: 'rgba(235, 235, 235, 1)',
+    UIColor: 'UIColor(red: 0.92, green: 0.92, blue: 0.92 , alpha: 1.00)',
+    opacity: 1,
+  },
+]
+
+const nightStyle: ColorStyle[] = [
+  {
+    type: 'SOLID',
+    name: 'Night / Primary',
+    codeName: 'primary',
+    snakeCodeName: 'primary',
+    designTokenName: 'night.primary',
+    color: '#013147',
+    colorRGB: 'rgba(1, 49, 71, 1)',
+    UIColor: 'UIColor(red: 0.00, green: 0.19, blue: 0.28 , alpha: 1.00)',
+    opacity: 1,
+  },
+  {
+    type: 'SOLID',
+    name: 'Night / Secondary',
+    codeName: 'secondary',
+    snakeCodeName: 'secondary',
+    designTokenName: 'night.secondary',
+    color: '#ffb70b',
+    colorRGB: 'rgba(255, 183, 11, 1)',
+    UIColor: 'UIColor(red: 1.00, green: 0.72, blue: 0.04 , alpha: 1.00)',
+    opacity: 1,
+  },
+  {
+    type: 'SOLID',
+    name: 'Night / on Primary',
+    codeName: 'onPrimary',
+    snakeCodeName: 'on_primary',
+    designTokenName: 'night.on_Primary',
+    color: '#c8c8c8',
+    colorRGB: 'rgba(200, 200, 200, 1)',
+    UIColor: 'UIColor(red: 0.78, green: 0.78, blue: 0.78 , alpha: 1.00)',
+    opacity: 1,
+  },
+]
+
+export {
+  brandStyle,
+  brandStyleSnake,
+  localStyle,
+  brandingStyle,
+  dayStyle,
+  nightStyle,
+}

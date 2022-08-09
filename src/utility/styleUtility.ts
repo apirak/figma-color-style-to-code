@@ -6,11 +6,14 @@ type ColorStyle = {
   name: string
   designTokenName: string
   codeName: string
+  snakeCodeName: string
   color: string
   colorRGB?: string
   UIColor?: string
   opacity?: number
 }
+
+type NameType = 'codeName' | 'designTokenName' | 'snakeCodeName' | 'name'
 
 type BrandColorStyle = { [key: string]: string }
 
@@ -29,14 +32,46 @@ let isSolidPaints = (
 
 function getReferenceName(name: string): string {
   let rName = name
-    .split('/')
+    .split(/[\/ _]/)
     .filter((path: string) => !!path)
     .map((n) => {
-      let n2 = n.trim().replaceAll(' ', '_')
-      return n2[0] != undefined ? n2[0].toLowerCase() + n2.slice(1) : ''
+      return n
+        .split(/(?=[A-Z])/)
+        .map((n2) => {
+          return n2 != undefined
+            ? n2[0].toUpperCase() + n2.slice(1).toLowerCase()
+            : ''
+        })
+        .join('')
+        .replace(/(.*?)\%/, 'Opacity$1')
+        .replaceAll(' ', '')
     })
-    .join('__')
-  return rName
+    .join('')
+    .replace(/^Branding/, '')
+    .replace(/^Day/, '')
+    .replace(/^Night/, '')
+  return rName[0] != undefined ? rName[0].toLowerCase() + rName.slice(1) : ''
+}
+
+function getReferenceSnakeName(name: string): string {
+  let rName = name
+    .split(/[\/ _]/)
+    .filter((path: string) => !!path)
+    .map((n) => {
+      return n
+        .split(/(?=[A-Z])/)
+        .filter((s) => s !== ' ')
+        .map((s) => {
+          return s.trim().toLowerCase()
+        })
+        .join('_')
+        .replace(/(.*?)\%/, 'opacity_$1')
+    })
+    .join('_')
+    .replace(/^branding_/, '')
+    .replace(/^day_/, '')
+    .replace(/^night_/, '')
+  return rName.toLowerCase()
 }
 
 function getDesignTokenName(name: string): string {
@@ -49,6 +84,19 @@ function getDesignTokenName(name: string): string {
     })
     .join('.')
   return dName
+}
+
+const loadLocalBrandColor = (
+  localBrandStyle: ColorStyle[],
+  nametype: NameType = 'codeName'
+) => {
+  let brandIndex: BrandColorStyle = {}
+  localBrandStyle
+    .filter((style) => style.type === 'SOLID')
+    .forEach((style) => {
+      brandIndex[style.color] = style[nametype]
+    })
+  return brandIndex
 }
 
 const loadBrandColor = () => {
@@ -72,6 +120,7 @@ function loadStyle(styles: PaintStyle[]) {
         type: 'SOLID',
         name: colorStyle.name,
         codeName: getReferenceName(colorStyle.name),
+        snakeCodeName: getReferenceSnakeName(colorStyle.name),
         designTokenName: getDesignTokenName(colorStyle.name),
         color: '#00000000',
         colorRGB: 'rgba(0, 0, 0, 0)',
@@ -86,6 +135,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: colorStyle.name,
           codeName: getReferenceName(colorStyle.name),
+          snakeCodeName: getReferenceSnakeName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
           color: colorToOpacityHex(paint.color, paint.opacity),
           colorRGB: colorToRgb(paint.color, paint.opacity),
@@ -99,6 +149,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: colorStyle.name,
           codeName: getReferenceName(colorStyle.name),
+          snakeCodeName: getReferenceSnakeName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
           color: gradientString(paint, colorToOpacityHex, colorToRgb),
           colorRGB: gradientString(paint, colorToRgb, colorToRgb),
@@ -115,8 +166,13 @@ function loadLocalStyle(): ColorStyle[] {
   return loadStyle(figma.getLocalPaintStyles())
 }
 
-export { loadLocalStyle, getReferenceName, loadBrandColor, getDesignTokenName }
+export {
+  loadLocalStyle,
+  getReferenceName,
+  loadBrandColor,
+  getDesignTokenName,
+  getReferenceSnakeName,
+  loadStyle,
+  loadLocalBrandColor,
+}
 export type { ColorStyle, BrandColorStyle }
-
-// For test
-export { loadStyle }
