@@ -50,7 +50,7 @@ const codeThemesStyle = (
         ? style.color
         : style.colorRGB
 
-      return `        $${style.pascalCodeName}: ${themeColor};`
+      return `        $${style.pascalCodeName}: ${themeColor},`
     })
     .join('\n')
 }
