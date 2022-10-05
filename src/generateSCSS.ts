@@ -63,14 +63,14 @@ const generateThemesCode = (
   const codeDayStyle: string = codeThemesStyle(dayStyle, brandStyle)
   const codeNightStyle: string = codeThemesStyle(nightStyle, brandStyle)
   return [
-    '$themes: (',
-    '    day: (',
+    'const systemColor = {',
+    '    day: {',
     codeDayStyle,
-    '    ),',
-    '    night: (',
+    '    },',
+    '    night: {',
     codeNightStyle,
-    '    ),',
-    ');',
+    '    },',
+    '}',
   ].join('\n')
 }
 
