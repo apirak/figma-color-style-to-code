@@ -24,10 +24,10 @@ describe('Separete Key from Name', () => {
 
   it('generate style with brand color', () => {
     let generatedCode = [
-      '$PrimaryFillStyle1: $a_color',
-      '$PrimaryFillStyle2: $b_color',
-      '$SecondaryFillStyle3: #fccce6',
-      '$FillStyle4: $blank_color',
+      '$primaryFillStyle1: $a_color',
+      '$primaryFillStyle2: $b_color',
+      '$secondaryFillStyle3: #fccce6',
+      '$fillStyle4: $blank_color',
     ]
     expect(codeLocalStyle(localStyle, brandStyleSnake)).toEqual(
       generatedCode.join('\n')

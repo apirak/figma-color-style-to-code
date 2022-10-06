@@ -23,7 +23,7 @@ let codeLocalStyle = (
           : style.opacity === 1
           ? style.color
           : style.colorRGB
-        return `$${style.pascalCodeName}: ${color}`
+        return `$${style.codeName}: ${color}`
       }
     })
     .join('\n')
@@ -50,7 +50,7 @@ const codeThemesStyle = (
         ? style.color
         : style.colorRGB
 
-      return `        ${style.pascalCodeName}: ${themeColor},`
+      return `        ${style.codeName}: ${themeColor},`
     })
     .join('\n')
 }
