@@ -45,12 +45,12 @@ const codeThemesStyle = (
     .filter((style) => style.type === 'SOLID')
     .map((style) => {
       let themeColor = brandStyle[style.color]
-        ? `$${brandStyle[style.color]}`
+        ? `${brandStyle[style.color]}`
         : style.opacity == 1
         ? style.color
         : style.colorRGB
 
-      return `        $${style.pascalCodeName}: ${themeColor},`
+      return `        ${style.pascalCodeName}: ${themeColor},`
     })
     .join('\n')
 }
