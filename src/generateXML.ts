@@ -21,7 +21,7 @@ let codeLocalStyle = (
         let color = brandStyle[style.color]
           ? `@color.${brandStyle[style.color]}`
           : style.color
-        return `    <item name="${style.codeName}">${color}</item>`
+        return `    <item name="${style.androidCodeName}">${color}</item>`
       }
     })
     .join('\n')
@@ -51,7 +51,7 @@ const codeThemesStyle = (
         ? `@color/${brandStyle[style.color]}`
         : style.color
 
-      return `    <item name="${style.codeName}">${themeColor}</item>`
+      return `    <item name="${style.androidCodeName}">${themeColor}</item>`
     })
     .join('\n')
 }
@@ -86,7 +86,9 @@ const codeAttrStyle = (
 ): string => {
   return dayStyle
     .filter((style) => style.type === 'SOLID')
-    .map((style) => `    <attr name="${style.codeName}" format="color">`)
+    .map(
+      (style) => `    <attr name="${style.androidCodeName}" format="color" />`
+    )
     .join('\n')
 }
 

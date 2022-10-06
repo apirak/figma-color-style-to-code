@@ -22,18 +22,18 @@ describe('Separete Key from Name', () => {
 
   it('generate day and night color', () => {
     let generatedCode = [
-      '$themes: (',
-      '    day: (',
-      '        $Primary: $light_blue,',
-      '        $Secondary: $light_orange,',
-      '        $OnPrimary: rgba(235, 235, 235, 0.8),',
-      '    ),',
-      '    night: (',
-      '        $Primary: $dark_blue,',
-      '        $Secondary: $dark_orange,',
-      '        $OnPrimary: #c8c8c8,',
-      '    ),',
-      ');',
+      'const systemColor = {',
+      '    day: {',
+      '        Primary: light_blue,',
+      '        Secondary: light_orange,',
+      '        OnPrimary: rgba(235, 235, 235, 0.8),',
+      '    },',
+      '    night: {',
+      '        Primary: dark_blue,',
+      '        Secondary: dark_orange,',
+      '        OnPrimary: #c8c8c8,',
+      '    },',
+      '}',
     ]
     const brandIndex = loadLocalBrandColor(brandingStyle, 'snakeCodeName')
     expect(generateThemesCode(dayStyle, nightStyle, brandIndex)).toEqual(
