@@ -45,7 +45,7 @@ const codeThemesStyle = (
     .filter((style) => style.type === 'SOLID')
     .map((style) => {
       let themeColor = brandStyle[style.color]
-        ? `${brandStyle[style.color]}`
+        ? `brandColor.${brandStyle[style.color]}`
         : style.opacity == 1
         ? style.color
         : style.colorRGB
