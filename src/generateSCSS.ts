@@ -42,7 +42,9 @@ const codeThemesStyle = (
   brandStyle: BrandColorStyle
 ): string => {
   return themeStyle
-    .filter((style) => style.type === 'SOLID')
+    .filter(
+      (style) => style.type === 'SOLID' || style.type === 'GRADIENT_LINEAR'
+    )
     .map((style) => {
       let themeColor = brandStyle[style.color]
         ? `$${brandStyle[style.color]}`
@@ -50,9 +52,9 @@ const codeThemesStyle = (
         ? style.color
         : style.colorRGB
 
-      return `        $${style.pascalCodeName}: ${themeColor},`
+      return `        $${style.pascalCodeName}: ${themeColor}`
     })
-    .join('\n')
+    .join(',\n')
 }
 
 const generateThemesCode = (

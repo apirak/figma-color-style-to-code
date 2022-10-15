@@ -118,6 +118,19 @@ const brandingStyle: ColorStyle[] = [
     UIColor: 'UIColor(red: 1.00, green: 0.72, blue: 0.04 , alpha: 1.00)',
     opacity: 1,
   },
+  {
+    type: 'GRADIENT_LINEAR',
+    name: 'Branding/Gradient Sunset',
+    codeName: 'gradientSunset',
+    pascalCodeName: 'GradientSunset',
+    snakeCodeName: 'gradient_sunset',
+    designTokenName: 'branding.gradient_Sunset',
+    color: 'linear-gradient( 180deg, #ff6666 0%, #2679c6 100% )',
+    colorRGB:
+      'linear-gradient( 180deg, rgba(255, 102, 102, 1) 0%, rgba(38, 121, 198, 1) 100% )',
+    UIColor: '',
+    opacity: 1,
+  },
 ]
 
 const dayStyle: ColorStyle[] = [
@@ -157,6 +170,19 @@ const dayStyle: ColorStyle[] = [
     UIColor: 'UIColor(red: 0.92, green: 0.92, blue: 0.92 , alpha: 0.80)',
     opacity: 0.8,
   },
+  {
+    type: 'GRADIENT_LINEAR',
+    name: 'Day / Accent',
+    codeName: 'accent',
+    pascalCodeName: 'Accent',
+    snakeCodeName: 'accent',
+    designTokenName: 'day.accent',
+    color: 'linear-gradient( 180deg, #ff6666 0%, #2679c6 100% )',
+    colorRGB:
+      'linear-gradient( 180deg, rgba(255, 102, 102, 1) 0%, rgba(38, 121, 198, 1) 100% )',
+    UIColor: '',
+    opacity: 1,
+  },
 ]
 
 const nightStyle: ColorStyle[] = [
@@ -194,6 +220,19 @@ const nightStyle: ColorStyle[] = [
     color: '#c8c8c8',
     colorRGB: 'rgba(200, 200, 200, 1)',
     UIColor: 'UIColor(red: 0.78, green: 0.78, blue: 0.78 , alpha: 1.00)',
+    opacity: 1,
+  },
+  {
+    type: 'GRADIENT_LINEAR',
+    name: 'Night / Accent',
+    codeName: 'accent',
+    pascalCodeName: 'Accent',
+    snakeCodeName: 'accent',
+    designTokenName: 'night.accent',
+    color: 'linear-gradient( 180deg, #ff6666 0%, #2679c6 100% )',
+    colorRGB:
+      'linear-gradient( 180deg, rgba(255, 102, 102, 1) 0%, rgba(38, 121, 198, 1) 100% )',
+    UIColor: '',
     opacity: 1,
   },
 ]

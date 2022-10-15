@@ -33,6 +33,39 @@ describe('Separete Key from Name', () => {
     },
   ]
 
+  const fills3: ReadonlyArray<GradientPaint> = [
+    {
+      type: 'GRADIENT_LINEAR',
+      blendMode: 'NORMAL',
+      gradientTransform: [
+        [6.123234262925839e-17, 1, 0],
+        [-1, 6.123234262925839e-17, 1],
+      ],
+      gradientStops: [
+        {
+          color: {
+            r: 1,
+            g: 0.3999999761581421,
+            b: 0.3999999761581421,
+            a: 1,
+          },
+          position: 0,
+        },
+        {
+          color: {
+            r: 0.1485416293144226,
+            g: 0.47429996728897095,
+            b: 0.7749999761581421,
+            a: 1,
+          },
+          position: 1,
+        },
+      ],
+      opacity: 1,
+      visible: true,
+    },
+  ]
+
   const style: PaintStyle = figma.createPaintStyle()
   style.type = 'PAINT'
   style.name = 'Brand / Fill style 2'
@@ -51,7 +84,18 @@ describe('Separete Key from Name', () => {
   emptyStyle.paints = []
   emptyStyle.description = 'This is style 1'
 
-  let localStyle: PaintStyle[] = [style, opacityStyle, emptyStyle]
+  const gradientStyle: PaintStyle = figma.createPaintStyle()
+  gradientStyle.type = 'PAINT'
+  gradientStyle.name = 'Gradient Style 4'
+  gradientStyle.paints = fills3
+  gradientStyle.description = 'This is style 4'
+
+  let localStyle: PaintStyle[] = [
+    style,
+    opacityStyle,
+    emptyStyle,
+    gradientStyle,
+  ]
 
   it('load style', () => {
     let colorStyle: ColorStyle[] = loadStyle(localStyle)
@@ -91,6 +135,19 @@ describe('Separete Key from Name', () => {
         name: 'Fill Style 3',
         opacity: 0,
         type: 'SOLID',
+      },
+      {
+        UIColor: '',
+        codeName: 'gradientStyle4',
+        color: 'linear-gradient( 180deg, #ff6666 0%, #2679c6 100% )',
+        colorRGB:
+          'linear-gradient( 180deg, rgba(255, 102, 102, 1) 0%, rgba(38, 121, 198, 1) 100% )',
+        designTokenName: 'gradient_Style_4',
+        name: 'Gradient Style 4',
+        opacity: 1,
+        pascalCodeName: 'GradientStyle4',
+        snakeCodeName: 'gradient_style_4',
+        type: 'GRADIENT_LINEAR',
       },
     ])
   })
