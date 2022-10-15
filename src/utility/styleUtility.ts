@@ -6,6 +6,7 @@ type ColorStyle = {
   name: string
   designTokenName: string
   codeName: string
+  androidCodeName: string
   snakeCodeName: string
   pascalCodeName: string
   color: string
@@ -16,6 +17,7 @@ type ColorStyle = {
 
 type NameType =
   | 'codeName'
+  | 'androidCodeName'
   | 'designTokenName'
   | 'snakeCodeName'
   | 'pascalCodeName'
@@ -60,6 +62,11 @@ function getReferencePascalName(name: string): string {
 
 function getReferenceName(name: string): string {
   let rName = getReferencePascalName(name)
+  return rName[0] != undefined ? rName[0].toLowerCase() + rName.slice(1) : ''
+}
+
+function getAndroidReferenceName(name: string): string {
+  let rName = 'color' + getReferencePascalName(name)
   return rName[0] != undefined ? rName[0].toLowerCase() + rName.slice(1) : ''
 }
 
@@ -130,6 +137,7 @@ function loadStyle(styles: PaintStyle[]) {
         type: 'SOLID',
         name: colorStyle.name,
         codeName: getReferenceName(colorStyle.name),
+        androidCodeName: getAndroidReferenceName(colorStyle.name),
         pascalCodeName: getReferencePascalName(colorStyle.name),
         snakeCodeName: getReferenceSnakeName(colorStyle.name),
         designTokenName: getDesignTokenName(colorStyle.name),
@@ -146,6 +154,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: colorStyle.name,
           codeName: getReferenceName(colorStyle.name),
+          androidCodeName: getAndroidReferenceName(colorStyle.name),
           pascalCodeName: getReferencePascalName(colorStyle.name),
           snakeCodeName: getReferenceSnakeName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),
@@ -161,6 +170,7 @@ function loadStyle(styles: PaintStyle[]) {
           type: paint.type,
           name: colorStyle.name,
           codeName: getReferenceName(colorStyle.name),
+          androidCodeName: getAndroidReferenceName(colorStyle.name),
           pascalCodeName: getReferencePascalName(colorStyle.name),
           snakeCodeName: getReferenceSnakeName(colorStyle.name),
           designTokenName: getDesignTokenName(colorStyle.name),

@@ -23,7 +23,7 @@ let codeLocalStyle = (
           : style.opacity === 1
           ? style.color
           : style.colorRGB
-        return `$${style.pascalCodeName}: ${color}`
+        return `$${style.codeName}: ${color}`
       }
     })
     .join('\n')
@@ -47,12 +47,11 @@ const codeThemesStyle = (
     )
     .map((style) => {
       let themeColor = brandStyle[style.color]
-        ? `$${brandStyle[style.color]}`
+        ? `brandColor.${brandStyle[style.color]}`
         : style.opacity == 1
         ? style.color
         : style.colorRGB
-
-      return `        $${style.pascalCodeName}: ${themeColor}`
+      return `        ${style.codeName}: ${themeColor},`
     })
     .join(',\n')
 }
@@ -65,14 +64,14 @@ const generateThemesCode = (
   const codeDayStyle: string = codeThemesStyle(dayStyle, brandStyle)
   const codeNightStyle: string = codeThemesStyle(nightStyle, brandStyle)
   return [
-    '$themes: (',
-    '    day: (',
+    'const systemColor = {',
+    '    day: {',
     codeDayStyle,
-    '    ),',
-    '    night: (',
+    '    },',
+    '    night: {',
     codeNightStyle,
-    '    ),',
-    ');',
+    '    },',
+    '}',
   ].join('\n')
 }
 
