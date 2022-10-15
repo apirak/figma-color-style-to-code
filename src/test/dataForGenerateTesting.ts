@@ -129,6 +129,7 @@ const brandingStyle: ColorStyle[] = [
   {
     type: 'GRADIENT_LINEAR',
     name: 'Branding/Gradient Sunset',
+    androidCodeName: 'colorGradientSunset',
     codeName: 'gradientSunset',
     pascalCodeName: 'GradientSunset',
     snakeCodeName: 'gradient_sunset',
@@ -185,6 +186,7 @@ const dayStyle: ColorStyle[] = [
     type: 'GRADIENT_LINEAR',
     name: 'Day / Accent',
     codeName: 'accent',
+    androidCodeName: 'colorAccent',
     pascalCodeName: 'Accent',
     snakeCodeName: 'accent',
     designTokenName: 'day.accent',
@@ -240,6 +242,7 @@ const nightStyle: ColorStyle[] = [
     type: 'GRADIENT_LINEAR',
     name: 'Night / Accent',
     codeName: 'accent',
+    androidCodeName: 'colorAccent',
     pascalCodeName: 'Accent',
     snakeCodeName: 'accent',
     designTokenName: 'night.accent',

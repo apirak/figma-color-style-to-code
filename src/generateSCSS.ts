@@ -51,7 +51,7 @@ const codeThemesStyle = (
         : style.opacity == 1
         ? style.color
         : style.colorRGB
-      return `        ${style.codeName}: ${themeColor},`
+      return `        ${style.codeName}: ${themeColor}`
     })
     .join(',\n')
 }

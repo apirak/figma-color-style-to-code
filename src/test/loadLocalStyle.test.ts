@@ -148,6 +148,7 @@ describe('Separete Key from Name', () => {
         designTokenName: 'gradient_Style_4',
         name: 'Gradient Style 4',
         opacity: 1,
+        androidCodeName: 'colorGradientStyle4',
         pascalCodeName: 'GradientStyle4',
         snakeCodeName: 'gradient_style_4',
         type: 'GRADIENT_LINEAR',
